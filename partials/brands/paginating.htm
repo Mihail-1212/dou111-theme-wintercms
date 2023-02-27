@@ -1,0 +1,50 @@
+{% if items.lastPage > 1 %}
+<div class="col-sm-12 block m-t-3" style="padding: 0!important;">
+    <div class="pagination-wrapper row font-size-14">
+        {% if items.currentPage > 1 %}
+        <li class="col-3 remove-list-style m-0 font-size-12 justify-content-end align-center d-flex">
+            <a 
+                href="{{ url(pagePath) }}{% if currentPage > 1 %}?page={{ items.currentPage-1 }}{% endif %}#paginated-brands"
+                class="unstyled-link h-100 d-flex align-center p-4"
+                >
+                <i class="fas fa-chevron-left"></i>
+            </a>
+        </li>
+        {% else %}
+            <li class="col-3 remove-list-style"></li>
+        {% endif %}
+
+        <div class="col-6 pagination-subwrapper d-flex justify-center align-center">
+
+             <ul class="pagination remove-list-style row m-0">
+                {% for page in 1..items.lastPage %}
+                <li class="col-auto m-0">
+                    <a 
+                        href="{{ url(pagePath) }}{% if page > 1 %}?page={{ page }}{% endif %}#paginated-brands"
+                        class="link {% if items.currentPage == page %}dark-link{% endif %}">
+                        
+                        {{ page }}
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        {% if items.lastPage > items.currentPage %}
+
+        <li class="col-3 remove-list-style m-0 font-size-12 justify-content-start align-center d-flex">
+            <a 
+                href="{{ url(pagePath) }}?page={{ items.currentPage+1 }}#paginated-brands"
+                class="unstyled-link h-100 d-flex align-center p-4"
+                >
+                 <i class="fas fa-chevron-right"></i>
+            </a>
+        </li>
+        {% else %}
+            <li class="col-3 remove-list-style"></li>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

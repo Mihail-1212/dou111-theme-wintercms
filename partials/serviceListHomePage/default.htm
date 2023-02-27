@@ -1,0 +1,62 @@
+<div class="row gy-3">
+
+  {% set break = false %}
+  {% for service_item in service_list if not break %}
+    {% set main_photo = service_item.getMainPhoto() %}
+    {% set departament_list = service_item.departaments %}
+
+    <div class="wrapper col-3">
+
+      <div class="d-block h-100">
+        <div class="tile h-100 p-2">
+          <img class="u-max-full-width img-contain"
+            style="height: 200px;"
+            src="{{main_photo.photo_path|media}}" alt="{{ main_photo.caption }}">
+
+          <div class="tile-body">
+            <div class="tile-title-body">
+              <h4 class="tile-title">{{ service_item.name }}</h4>
+              <h5 class="tile-subtitle price"><strong>₽{{ service_item.price }}</strong></h5>
+            </div>
+            <div class="card-text">
+              {% if departament_list %}
+                <ul class="m-b-0">
+                  {% for departament_item in departament_list %}
+                    {% set departament_short_address = departament_item.getShortAddress() %}
+
+                    <li>{{ departament_item.name | ucfirst }} ({{ departament_short_address }})</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+              <a class="link" href="{{ 'service' | page({service_id: service_item.id}) }}">{{ "Learn more" | _ }} &raquo;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  {% endfor %}
+
+  <!-- Block to link to all services  -->
+
+  <div class="wrapper col-3">
+
+    <div class="d-block h-100">
+      <div class="tile h-100 p-2">
+
+        <div class="tile-body align-center d-flex h-100 justify-center">
+          <h2>
+            <a class="link dark-link" href="{{ 'services' | page }}">
+              {{ "All services" | _ }} &raquo;
+            </a>
+          </h2>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

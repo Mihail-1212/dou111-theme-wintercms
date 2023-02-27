@@ -1,0 +1,124 @@
+[viewBag]
+
+[searchInput]
+useAutoComplete = 0
+autoCompleteResultCount = 5
+showProviderBadge = 1
+searchPage = "search-results.htm"
+==
+<?php
+function onStart()
+{
+    $this['backendUrl'] = Backend::url('/');
+    $this['logo'] = Backend\Models\BrandSetting::getLogo();
+}
+?>
+==
+<!-- Nav -->
+<header>
+  <div class="d-lg-block" id="header-top">
+    <div class="container-lg">
+      <div class="row d-flex align-center">
+        <div class="col-md-2"> <img class="u-max-full-width img-cover w-75" src="{{ logo }}" alt="">
+        </div>
+        <div class="col-md-10">
+          <div class="logo-wrapper logo-wrapper-top font-w-bold color-black-blue">
+            <div class="logo-title text-center">
+              <p class="institution-type text-uppercase font-size-14">{{ this.theme.org_full_abbreviation }}</p>
+              <p class="institution-name font-size-24">"{{ this.theme.org_name }}"<span
+                  class="institution-subname p-l-1 font-size-16">{{ this.theme.org_subname }}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-100" id="header-nav">
+    <div class="header-nav-content"><!-- Navbar-->
+      <nav class="navbar"><!-- Container wrapper-->
+        <div class="container-lg">
+          <div class="row"><!-- Navbar menu-->
+            <div class="dropdown-wrapper col-auto d-flex align-center"><button
+                class="button-logo button button-dark button-icon button-icon-no-text m-0 dropdown-toggle"
+                id="menuButton" title="Меню" aria-label="Меню">
+                <div class="icon-wrapper"><span
+                    class="fa fa-bars d-block font-size-15 ps-absolute icon-closed"></span><span
+                    class="fas fa-times d-block font-size-15 ps-absolute icon-droped"></span></div><span
+                  class="text">&#x200B</span>
+              </button>
+              <!--Dropdown Navbar -->
+              {% partial 'site/navbar' %}
+               <!--/Dropdown Navbar -->
+
+            </div>
+            <!-- Brand -->
+            <div class="logo-wrapper d-inline-flex col-auto">
+              <a class="logo-title" href="{{ homePageUrl }}">
+                <p class="institution-type font-size-8">{{ this.theme.org_abbreviation }}</p>
+                <p class="institution-name font-size-11 font-w-bold">"{{ this.theme.org_name }}"</p>
+                <p class="institution-subname font-size-9">{{ this.theme.org_subname }}</p>
+              </a>
+            </div><!-- Links block-->
+            <div class="links-block col-auto align-center d-lg-flex"><a class="link dark-link" href="{{ 'about'|staticPage }}">{{ "About us" | _ }}</a><a
+                class="link dark-link m-l-2" href="{{ 'for-parents'|staticPage }}">{{ "For parents" | _ }}</a></div>
+
+            <!-- Search block-->
+            <div class="search-block col d-flex align-center">
+              {% component 'searchInput' %}
+            </div>
+
+            <!-- Buttons list-->
+            <div class="butons-list col-auto d-flex">
+              <!-- Для слабовидящих -->
+              <button
+                data-request="onVisuallyImpaired"
+                data-request-success="window.location.reload();"
+                class="button my-auto button-accessibility-mobile d-lg-none m-r-1">{{ "For the visually impaired" | _ }}</button>
+              
+              <!-- Для слабовидящих, но иконка -->
+              <button
+                data-request="onVisuallyImpaired"
+                data-request-success="window.location.reload();"
+                class="button button-icon button-icon-no-text my-auto m-r-1 tooltip-dark button-accessibility-desktop d-lg-flex text-decoration-none"
+                title="{{ "For the visually impaired" | _ }}" aria-label="{{ "For the visually impaired" | _ }}">
+                <div class="icon-wrapper">
+                  <span class="fa-eye fas font-size-14 d-block"></span>
+                </div>
+                <span class="text">&#x200B</span>
+              </button>
+
+              <a
+                class="button button-icon button-icon-no-text my-auto m-r-1 tooltip-dark button-info-desktop d-lg-flex text-decoration-none"
+                title="{{ "Contacts" | _ }}" aria-label="{{ "Contacts" | _ }}" href="{{ 'contacts'|staticPage }}">
+                <div class="icon-wrapper">
+                  <span class="fas fa-info-circle font-size-14 d-block"></span>
+                </div>
+                <span class="text">&#x200B</span>
+              </a>
+
+              {% if user %}
+                  <a href="{{ "profile" | page }}" class="button my-auto button-auth-desktop m-r-1">{{ "Profile" | _ }}</a>
+
+                  <a
+                    href="#"
+                    data-request="onLogout" data-request-data="redirect: '{{ homePageUrl }}'"
+                    class="button button-icon button-icon-no-text my-auto m-r-1 tooltip-dark button-info-desktop d-lg-flex text-decoration-none"
+                    title="{{ "Logout" | _ }}" aria-label="{{ "Logout" | _ }}">
+                    <div class="icon-wrapper">
+                      <span class="fas fa-sign-out-alt font-size-14 d-block"></span>
+                    </div>
+                    <span class="text">&#x200B</span>
+                  </a>
+
+              {% else %}
+                  <a href="{{ "login" | page }}" class="button my-auto button-auth-desktop">{{ "Login" | _ }}</a>
+              {% endif %}
+            </div>
+            <!-- Toggle button--><!-- Collapsible wrapper-->
+          </div>
+        </div><!-- Container wrapper-->
+      </nav><!-- Navbar-->
+    </div>
+  </div>
+</header>

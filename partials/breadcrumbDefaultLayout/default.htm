@@ -1,0 +1,21 @@
+<div class="row page-row breadcrumps-row m-t-1">
+    {% if breadcrumbs and not isHomePage %}
+        <ol class="col breadcrumb">
+            
+            <!-- Add home page -->
+            <li class="breadcrumb-item"><a class="home" href="{{ homePageUrl }}"> <i class="fas fa-home font-size-12"></i></a></li>
+
+            {% for link in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="breadcrumb-item">{{ link.title|raw }}</li>
+                {% else %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ link.url }}">{{ link.title|raw }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+        </ol>
+    {% endif %}
+</div>
+  

@@ -1,0 +1,94 @@
+title = "Авторизация"
+url = "/user/login"
+layout = "default"
+is_hidden = 0
+
+[account]
+redirect = "profile"
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[session]
+security = "guest"
+redirect = "profile"
+==
+<?php
+function onStart()
+{
+	// $this['content_nav_show'] = true;
+
+	$this['static_title_show'] = true;
+	$this['static_title'] = "Авторизация";
+}
+?>
+==
+{% if not user %}
+
+    <div class="row">
+        <!-- Sign in only -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Sign in partial -->
+
+                {{ form_ajax('onSignin') }}
+
+                    <div class="form-group">
+                        <label for="userSigninLogin">{{ loginAttributeLabel }}</label>
+                        <input
+                            name="login"
+                            type="text"
+                            class="form-control u-full-width"
+                            id="userSigninLogin"
+                            placeholder="{{ "Enter your" | _ }} {{ loginAttributeLabel|lower }}" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userSigninPassword">{{ "Password" | _ }}</label>
+                        <input
+                            name="password"
+                            type="password"
+                            class="form-control u-full-width"
+                            id="userSigninPassword"
+                            placeholder="{{ "Enter your" | _ }} {{ "Password" | _  | lowercase }}" />
+                    </div>
+
+                    {% if rememberLoginMode == 'ask' %}
+                    <div class="form-group">
+                        <div class="checkbox">
+                        <label><input name="remember" class="m-r-1 scale-1-2" type="checkbox" value="1">{{ "Stay logged in" | _ }}</label>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="button button-primary">{{ "Login" | _ }}</button>
+
+                {{ form_close() }}
+            </div>
+        </div>
+
+        {#
+        <div class="row">
+            <div class="col-md-12">
+                {% partial account ~ '::register' %}
+            </div>
+        </div>
+        #}
+
+    </div>
+
+{% else %}
+
+    GO TO PROFILE
+
+    {#
+
+    {% partial account ~ '::activation_check' %}
+
+    {% partial account ~ '::update' %}
+
+    {% partial account ~ '::deactivate_link' %}
+
+    #}
+
+{% endif %}

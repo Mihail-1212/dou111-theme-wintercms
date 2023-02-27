@@ -1,0 +1,61 @@
+items:
+    -
+        title: 'Заказать справку'
+        nesting: 0
+        type: static-page
+        url: null
+        code: ''
+        reference: electronic-reception-order-certificate
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: 'fas fa-info-circle'
+            isExternal: '0'
+    -
+        title: 'Запись на прием к руководителю по личным вопросам'
+        nesting: 0
+        type: static-page
+        url: null
+        code: ''
+        reference: electronic-reception-appointment-supervisor
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: 'far fa-user'
+            isExternal: '0'
+    -
+        title: 'Задать вопрос'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: electronic-reception-make-question
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: 'far fa-question-circle'
+            isExternal: '0'
+    -
+        title: 'Приём обращений граждан'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: electronic-reception-reception-citizens
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: 'far fa-id-card'
+            isExternal: '0'
+    -
+        title: 'Сообщить о фактах коррупции'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: electronic-reception-report-corruption
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: 'fas fa-user-secret'
+            isExternal: '0'
+name: 'Меню электронной приемной'

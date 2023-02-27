@@ -1,0 +1,86 @@
+<div class="row gy-3">
+
+
+  {% for departament_item in departament_list %}
+    {% set photo = departament_item.departament_photos.first %}
+    <div class="col-md-6 card-wrapper">
+        <div class="card">
+          {% if departament_item.is_main %}
+            <div class="img-avatar"><i class="icon fas fa-crown scale-3"></i></div>
+          {% endif %}
+          <div class="card-text">
+
+            <div class="title-img">
+              <img class="u-max-full-width img-cover"
+                src="{{photo.photo_path|media}}" alt="{{ photo.caption }}">
+            </div>
+
+            <div class="title-total">
+              <div class="subtitle">{{ "Departaments" | _ }} </div>
+
+              <h2>{{ departament_item.name }} {% if departament_item.is_main %}<small class="color-black-blue"><sub>{{ "Main" | _ }}</sub></small>{% endif %}</h2>
+
+              <div class="desc">{{ departament_item.getFullAddress() }}</div>
+
+              <div class="row">
+
+                <div class="wrapper m-t-1">
+                  <a class="button button-icon tooltip-dark text-decoration-none"
+                    title="{{ departament_item.contact_phone }}"
+                    href="tel:{{ departament_item.contact_phone }}">
+                    <div class="icon-wrapper">
+                      <i class="icon fas fa-phone-alt font-size-12"></i>
+                    </div>
+                    <div class="text text-decoration-underline-hover">
+                      {{ "Call" | _ }} 
+                    </div>
+                  </a>
+                </div>
+
+                <div class="wrapper">
+                  <a class="button button-icon text-decoration-none"
+                    href="javascript:;"
+                    data-address="{{ departament_item.getFullAddress() }}"
+                    onclick="copyToClipboard($(this).data('address'), 'Адрес скопирован!')"
+                    >
+                    <div class="icon-wrapper">
+                      <i class="icon fas fa-map-marker-alt font-size-12"></i>
+                    </div>
+                    <div class="text text-decoration-underline-hover">{{ "Copy address" | _ }} </div>
+                  </a>
+                </div>
+
+
+                <div class="wrapper">
+                  <a class="button button-icon text-decoration-none"
+                    href="{{ 'departament' | page({departament_id: departament_item.id}) }}">
+                    <div class="icon-wrapper">
+                      <i class="icon fab fa-buromobelexperte font-size-12"></i>
+                    </div>
+                    <!-- {{ "offline.sitesearch::lang.plugin.description" | trans }}  !-->
+
+                    <div class="text text-decoration-underline-hover">{{ "Learn more" | _ }}  &raquo;</div>
+                    <!-- {{ "themes.dou111-theme::lang.partials.learn_more" | trans }} -->
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+  {% endfor %}
+
+</div>
+
+<div class="row">
+  <div class="col">
+    <h4 class="d-flex justify-center m-t-2 m-b-0">
+      <a href="{{ 'departaments' | page }}" class="link dark-link">
+        {{ "All departaments" | _ }}  &raquo;
+      </a>
+    </h4>
+  </div>
+</div>

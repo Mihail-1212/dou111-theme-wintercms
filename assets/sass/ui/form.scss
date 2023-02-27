@@ -1,0 +1,192 @@
+// Links
+@mixin icon_mixin {
+  .fa, .fab, .fad, .fal, .far, .fas {
+    text-decoration: none!important;
+  }
+}
+
+.unstyled-link {
+  &,
+  &:hover,
+  &:focus {
+    color: inherit;
+    text-transform: inherit;
+    text-decoration: inherit;
+  }
+}
+
+.text-decoration-none {
+  text-decoration: none!important;
+}
+
+.text-decoration-underline {
+  text-decoration: underline!important;
+}
+
+.text-decoration-underline-hover {
+  &:hover {
+    text-decoration: underline!important;
+  }
+}
+
+.link {
+  color: $link-color;
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+
+  &.dark-link {
+    color: $btn-def-color;
+
+    &:hover,
+    &:focus {
+      color: $btn-def-color-hover;
+    }
+  }
+}
+
+// Buttons
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  color: $btn-def-color;
+  border: 1px solid $btn-def-color-border;
+  font-size: $btn-font-size;
+  height: auto;
+  line-height: $btn-line-height;
+  padding: $btn-padding-y $btn-padding-x;
+  border-radius: $btn-border-radius;
+
+  &.button-p-min {
+    line-height: normal;
+    padding: $btn-padding-y-min $btn-padding-x-min;
+  }
+
+  &:hover,
+  &:focus {
+    color: $btn-def-color-hover;
+    border-color: $btn-def-color-border-hover;
+    text-decoration: underline;
+  }
+
+  // Reverse button - black
+  &.button-dark {
+    color: $white;
+    background-color: $main-text-black;
+  }
+
+  // Primary btn
+  &.button-primary {
+    color: $white-link-color;
+    background-color: $link-color;
+    border-color: $link-color;
+  
+    &:hover,
+    &:focus {
+      // color: $white-link-color;
+      background-color: $link-hover-color;
+      border-color: $link-hover-color;
+    }
+  }
+
+  // Cancel btn
+  &.button-cancel {
+    color: $white-link-color;
+    background-color: $btn-cancel-color;
+    border-color: $btn-cancel-color;
+  
+    &:hover,
+    &:focus {
+      // color: $white-link-color;
+      background-color: $btn-cancel-color-hover;
+      border-color: $btn-cancel-color-hover;
+    }
+  }
+
+  // Icon button
+  &.button-icon {
+    display: inline-grid;
+    grid-auto-columns: min-content;
+    grid-template-columns: auto auto;
+    align-items: center;
+    padding: 0;
+    padding-right: $btn-padding-x;
+  
+    &>* {
+      display: inline-flex;
+  
+      &.icon-wrapper {
+        width: $btn-icon-icon-width;
+        height: $btn-icon-icon-height;
+        margin: $btn-icon-icon-margin-y $btn-icon-icon-margin-x;
+  
+        justify-content: center;
+        align-items: center;
+  
+        &>.icon {
+  
+          &.gg-eye,
+          &.gg-eye-alt {
+            margin-bottom: $btn-icon-icon-eye-gap-center;
+          }
+        }
+      }
+    }
+
+    // Button with icon - no text
+    &.button-icon-no-text {
+      padding: 0;
+    }
+
+    // Icon in frame
+    &.icon-frame {
+      // &:hover,
+      // &:focus {
+      //   // color: $btn-def-color-hover !important;
+      // }
+    
+      &>* {
+        display: inline-flex;
+    
+        &.icon-wrapper {
+          color: $btn-def-color !important;
+          background-color: $white-link-color;
+          border-radius: $btn-border-radius;
+        }
+    
+        &.text {
+          margin-left: $btn-icon-frame-text-gap-left;
+        }
+      }
+    }
+  }
+}
+
+// Forms
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  height: auto;
+  padding: $input-padding-y $input-padding-x;
+}
+
+textarea {
+  // Делаем минимальную высоту для textarea
+  height: 1px;
+  min-width: 40%;
+  max-width: 100%;
+}

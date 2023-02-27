@@ -1,0 +1,18 @@
+.title,
+.color-black-blue {
+  color: $black-blue!important;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+
+  opacity: .6s;
+
+  &.hover-normal {
+
+    &:hover {
+      filter: none;
+    }
+    
+  }
+}

@@ -1,0 +1,23 @@
+<form class="w-100 m-0" action="{{ __SELF__.searchPage | page }}?q={{ query | url_encode(true) }}" method="get">
+    <div class="ss-search-form">
+        <div class="ss-search-form__input">
+            <input name="q" type="text" placeholder="{{ "What are you looking for?" | _ }}" 
+                   id="siteSearch"
+                   class="m-0"
+                   value="{{ __SELF__.query }}"
+
+                   autocomplete="off"
+                    {% if __SELF__.useAutoComplete %}
+                        data-track-input
+                        data-request="{{ __SELF__ }}::onType"
+                        data-request-before-update="document.getElementById('autocomplete-results').classList.add('ss-search-form__results--visible')"
+                        data-request-update="'{{ __SELF__ }}::autocomplete': '#autocomplete-results'"
+                    {% endif %}
+            >
+            <button class="ss-search-form__submit m-0 d-flex align-center text-decoration-none" type="submit">
+                <i class="fas fa-search font-size-15"></i>
+            </button>
+        </div>
+        <div class="ss-search-form__results" id="autocomplete-results"></div>
+    </div>
+</form>

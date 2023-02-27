@@ -1,0 +1,13 @@
+{% set links = __SELF__.links %}
+
+{% if links | length %}
+	<ul class="remove-list-style row gx-2">
+		{% for link in links %}
+			<li class="col-auto">
+				<a class="font-size-16" target="{{ __SELF__.linkTarget }}" href="{{ link.getLink }}" title="{{ link.getName }}">
+					<i class="{{ link.getIcon }}"></i>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

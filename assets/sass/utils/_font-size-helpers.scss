@@ -1,0 +1,23 @@
+$font-size-list-start: 8;
+$font-size-list-end: 36;
+
+
+$font-size-index: $font-size-list-start;
+@while $font-size-index <= $font-size-list-end {
+  .font-size-#{$font-size-index} {
+    font-size: $font-size-index * 1pt;
+  }
+
+  // Increase index
+  $font-size-index: $font-size-index + 1;
+}
+
+.font-size-inherit {
+  font-size: inherit!important;
+}
+
+// @each $value in $font-size-list {
+//   .font-size-#{$value} {
+//     font-size: pxToRem($value);
+//   }
+// }

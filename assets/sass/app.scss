@@ -1,0 +1,117 @@
+// import Raleway font (main)
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+// import Comfortaa font (logo)
+// font-family: 'Comfortaa', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+// Icons: css.gg
+// https://css.gg/app
+// @import url('https://css.gg/css');
+
+// Import block styles
+@import 'variables/variables.scss';
+@import 'layout/layout.scss';
+@import 'ui/ui.scss';
+@import 'utils/utils.scss';
+
+:root {
+  // https://github.com/astrit/css.gg#4-resizing
+  --ggs: #{$icon-size};
+}
+
+* {
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box!important;
+  }
+}
+
+body {
+  --navbar-margin-top: 2rem;
+  --navbar-margin-bottom: 2rem;
+  --block-border-radius: #{$block-border-radius};
+  --content-border-radius: #{$btn-border-radius};
+  --body-background: #{$gray-clouds};
+  --body-main-text-color: #{$main-text-black};
+
+  --body-lightnest-blue-color: #{$lightnest-blue};
+  --body-light-blue-color: #{$light-blue};
+  --body-blue-color: #{$blue};
+  --body-dark-blue-color: #{$dark-blue};
+  --body-black-blue-color: #{$black-blue};
+
+  background-color: var(--body-background);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  color: var(--body-main-text-color);
+
+  .content {
+    margin-top: $content-margin-top;
+
+    &.header-padding {
+      // Variable from js
+      margin-top: var(--content-margin-top);
+    }
+  }
+
+  .mask-icon {
+    &:after,
+    &:after {
+      background-color: $main-text-black;
+    }
+  }
+
+  .icon-vk {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      mask-image: $vk-icon-svg;
+    }
+  }
+}
+
+h6 {
+  font-size: 2rem;
+}
+
+hr {
+  margin: 0;
+}
+
+// Grid override
+
+// .container {
+//   max-width: 1080px;
+// }
+
+// Button to top
+
+#toTop {
+  right: 20px;
+  bottom: 20px;
+  transition: opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+// x1 - 768px - mobile
+// 768px - 1024px - square desktop
+// 1024 - x2 - desktop
+
+
+// min-width: 1024px
+// min-width: 768px

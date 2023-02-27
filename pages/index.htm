@@ -1,0 +1,198 @@
+title = "Главная"
+url = "/"
+layout = "homePage"
+is_hidden = 0
+
+[slider]
+slide_show_id = 1
+
+[brands homepageBrands]
+brandPage = 404
+categoryPage = 404
+categoryFilter = "state-brands"
+letterFilter = "{{ :letter }}"
+perPage = 24
+sortOrder = "ASC"
+pageNumber = "{{ page }}"
+perRow = 6
+logoWidth = 300
+logoHeight = 300
+
+[contenteditor contenteditorGreetingTitle]
+file = "home-page/greeting-block-title.htm"
+fixture = "h2"
+
+[contenteditor contenteditorGreetingSubtitle]
+file = "home-page/greeting-block-subtitle.htm"
+fixture = "h5"
+
+[contenteditor contenteditorGreetingText]
+file = "home-page/greeting-block-text.htm"
+
+[contenteditor contenteditorDepartamentsTitle]
+file = "home-page/departament-block-title.htm"
+fixture = "h4"
+
+[contenteditor contenteditorServicesTitle]
+file = "home-page/service-block-title.htm"
+fixture = "h4"
+
+[contenteditor contenteditorManagementTitle]
+file = "home-page/management-block-title.htm"
+fixture = "h4"
+
+[contenteditor contenteditorFounderTitle]
+file = "home-page/founder-title.htm"
+fixture = "h5"
+
+[contenteditor contenteditorFounderText]
+file = "home-page/founder-text.htm"
+
+[contenteditor contenteditorGoalsTitle]
+file = "home-page/goals-title.htm"
+fixture = "h5"
+
+[contenteditor contenteditorGoalsText]
+file = "home-page/goals-text.htm"
+
+[departamentList departamentListHomePage]
+outputCount = 2
+
+[serviceList serviceListHomePage]
+needBlend = 1
+outputCount = 3
+
+[personalList]
+useManagement = 1
+
+[siteSearchInclude]
+
+[contenteditor contenteditorBrandsTitle]
+file = "home-page/brands-title.htm"
+fixture = "h5"
+
+[brands]
+brandPage = "{{ brands | staticPage }}"
+categoryPage = 404
+categoryFilter = "{{ :category }}"
+letterFilter = "{{ :letter }}"
+perPage = 9
+sortOrder = "ASC"
+pageNumber = "{{ page }}"
+perRow = 3
+logoWidth = 300
+logoHeight = 300
+==
+<!-- Слайдер и баннеры -->
+<div class="page-row row">
+  <div class="row">
+    <!-- Banners -->
+    <div class="col-lg-3 d-lg-block d-md-none">
+      {% component 'homepageBrands' %}
+    </div>
+    <!-- Slider -->
+    <div class="col-lg-9 col-md-12">
+      {% component 'slider' %}
+    </div>
+  </div>
+</div>
+
+<!-- Блок приветствия -->
+<div class="row page-row greeting-block">
+
+  <div class="row block">
+    <div class="col-lg-6 col-md-12">
+
+      {% component 'contenteditorGreetingTitle' %}
+
+      {% component 'contenteditorGreetingSubtitle' %}
+
+      <div class="">
+        {% content 'home-page/greeting-block-image.htm' %}
+        <!-- <img class="u-max-full-width img-cover" src=""
+        alt="Изображение 1 блока приветствия"> -->
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12 child-text-my0">
+
+      {% component 'contenteditorGreetingText' %}
+    </div>
+  </div>
+
+</div>
+
+<!-- Корпуса -->
+<div class="row page-row">
+  <div class="row">
+    <div class="col">
+      {% component 'contenteditorDepartamentsTitle' %}
+    </div>
+  </div>
+
+  {% component 'departamentListHomePage' %}
+</div>
+
+<!-- Платные услуги -->
+<div class="row page-row">
+  <div class="row">
+    <div class="col">
+      {% component 'contenteditorServicesTitle' %}
+    </div>
+  </div>
+
+  {% component 'serviceListHomePage' %}
+</div>
+
+<!-- Руководство -->
+<div class="row page-row">
+  <div class="row">
+    <div class="col">
+      {% component 'contenteditorManagementTitle' %}
+    </div>
+  </div>
+
+  {% component 'personalList' %}
+</div>
+
+<!-- Учредитель -->
+<div class="row page-row">
+  <div class="row">
+    <div class="col">
+      {% component 'contenteditorFounderTitle' %}
+    </div>
+  </div>
+
+  <div class="block row">
+      {% component 'contenteditorFounderText' %}
+  </div>
+</div>
+
+<!-- Цели и задачи -->
+<div class="row page-row">
+  <div class="row">
+    <div class="col">
+        {% component 'contenteditorGoalsTitle' %}
+    </div>
+  </div>
+
+  <div class="block row">
+        {% component 'contenteditorGoalsText' %}
+  </div>
+</div>
+
+<!-- Бренды -->
+<div class="row page-row">
+  <div class="row">
+    <div class="col">
+        {% component 'contenteditorBrandsTitle' %}
+    </div>
+  </div>
+
+  <div class="block row">
+        {% component 'brands' %}
+  </div>
+</div>
+
+
+<!-- Home page content end -->

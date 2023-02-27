@@ -1,0 +1,172 @@
+title = "Персонал"
+url = "/personal"
+layout = "default"
+is_hidden = 0
+
+[personalList]
+useManagement = 0
+==
+<?php
+function onStart()
+	{
+		$this['content_nav_show'] = true;
+
+		$this['static_title_show'] = true;
+		$this['static_title'] = "Персонал";
+
+		$this['content_block_medium'] = true;
+
+		$this['find_full_name'] = request()->get('full_name');
+	}
+?>
+==
+<div class="row gy-3">
+
+	<div class="pagination-list" 
+		data-value-names="['full_name', 'phone', 'departament', 'job_position', 'is_management']" 
+		data-page="12"
+		data-init-search="{'full_name': '{{ find_full_name }}'}"
+		>
+
+		<!-- CONTROLS -->
+	    <div class="pagination-controls m-t-2">
+
+	        <div class="row gx-2 m-b-1">
+	            <div class="col-8 flex-grow-1">
+	                <input class="search u-full-width m-0" 
+		                type="text" 
+		                {% if find_full_name %}
+	                    	value="{{ find_full_name }}"
+		                {% endif %}
+		                placeholder="{{ 'Type to search and press "Enter"' | _ }}" />
+	            </div>
+
+	            <div class="col-auto">
+	                <select class="items-count p-t-0 p-b-0 h-100 m-0 p-l-1">
+
+	                    <option value="12">12</option>
+	                    <option value="24">24</option>
+	                    <option value="36">36</option>
+
+	                </select>
+	            </div>
+	        </div>
+
+	        <div class="row">
+
+	            <div class="col-12 flex-grow-1">
+	                <div class="sort-text d-inline-block">
+	                    {{ 'Sort' | _ }}: 
+	                </div>
+
+	                <span class="sort sort-control link cursor-pointer selection-none" data-sort="full_name">
+	                    {{ 'Sort by full name' | _ }}
+
+	                    <span class="sort-control-asc mx-2 color-black-blue">
+	                        <i class="fas fa-sort-alpha-up scale-1-5"></i>
+	                    </span>
+
+	                    <span class="sort-control-desc mx-2 color-tomato-red">
+	                        <i class="fas fa-sort-alpha-up-alt scale-1-5"></i>
+	                    </span>
+	                </span>
+
+	                |
+
+	                <span class="sort sort-control link cursor-pointer selection-none" data-sort="departament">
+	                    {{ 'Sort by departaments' | _ }}
+
+	                    <span class="sort-control-asc mx-2 color-black-blue">
+	                        <i class="fas fa-sort-numeric-up scale-1-5"></i>
+	                    </span>
+
+	                    <span class="sort-control-desc mx-2 color-tomato-red">
+	                        <i class="fas fa-sort-numeric-up-alt scale-1-5"></i>
+	                    </span>
+	                </span>
+
+	                |
+
+	                <label for="is_management_checkbox" 
+	                	data-check="is_management"
+	                	class="cursor-pointer selection-none d-inline-flex align-items-center">
+
+	                    {{ 'Management only' | _ }}
+	                    <input id="is_management_checkbox" type="checkbox" 
+	                    	class="m-b-0 mx-2 scale-1-2">
+
+	                </label>
+	            </div>
+
+	        </div>
+
+	    </div>
+
+		<hr class="m-t-1 m-b-4" />
+
+		
+		<!-- LIST -->
+		<ul class="list remove-list-style row gx-4">
+			{% for personal_item in personal_list %}
+			{% set full_name = personal_item.getFullName() %}
+			{% set personal_departament = personal_item.departament %}
+			{% set personal_job_position = personal_item.job_position %}
+
+			<li class="m-b-2 col-md-3 col-sm-4 col-6">
+				
+				<div class="wrapper">
+					<div class="tile d-grid rows-half min-height-normal">
+						<img class="u-max-full-width img-cover w-100"
+						style="height: 200px;"
+						src="{{personal_item.photo_path|media}}" alt="{{ full_name }}">
+						<div class="tile-body">
+							<div class="card-text">
+
+								<p class="d-none is_management">{{ personal_item.is_management }}</p>
+
+								<p class="m-0 mb-3 full_name">{{ i }} {{ full_name }}</p>
+								<p class="m-0 font-size-10 job_position">
+									{{ personal_job_position.name | ucfirst }}
+								</p>
+								<p class="m-0 font-size-10 departament">
+									<strong>{{ personal_departament.name }}</strong>
+									<a href="{{ 'departament' | page({departament_id: personal_departament.id}) }}" target="_blank">
+					            		<i class="fas fa-external-link-alt"></i>
+					            	</a>
+								</p>
+								<p class="m-0 font-size-10 phone">
+									<strong>{{ personal_item.contact_phone }}</strong>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</li>
+
+			{% endfor %}
+			
+		</ul>
+
+
+		<!-- Pagination -->
+		<div class="pagination-wrapper block font-size-16 overflow-hidden m-b-1 d-flex justify-center align-center">
+
+		    <li class="remove-list-style m-0 font-size-12 control-button disabled">
+		        <a href="#" class="page" data-page="prev" >
+		            <i class="fas fa-chevron-left"></i>
+		        </a>
+		    </li>
+
+		    <ul class="pagination remove-list-style d-flex justify-center align-center m-0"></ul>
+
+		    <li class="remove-list-style m-0 font-size-12 control-button">
+		        <a href="#" class="page" data-page="next">
+		            <i class="fas fa-chevron-right"></i>
+		        </a>
+		    </li>
+		</div>
+
+	</div>
+
+</div>

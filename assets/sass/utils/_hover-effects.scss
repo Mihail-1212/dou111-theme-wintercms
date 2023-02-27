@@ -1,0 +1,34 @@
+.shadow-box-hoverable {
+
+  &:hover {
+    box-shadow: $block-shadow!important;
+  }
+}
+
+$effect-underline-height: 2px;
+$effect-underline-transition-time: $transition;
+$effect-underline-color: $btn-def-color-hover;
+
+
+.effect-underline-inside-out {
+	position: relative;
+
+	&:before {
+		content: "";
+    position: absolute;
+    right: 0; left: 0; bottom: 0;
+		
+		width: 100%;
+		height: $effect-underline-height;
+		
+		background-color: $effect-underline-color;
+		visibility: hidden;
+		transform: scaleX(0);
+		transition: all $effect-underline-transition-time ease-in-out 0s;
+	}
+
+	&:hover:before {
+		visibility: visible;
+		transform: scaleX(1);
+	}
+}

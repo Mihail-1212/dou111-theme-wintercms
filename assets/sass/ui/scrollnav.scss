@@ -1,0 +1,43 @@
+$scroll-name: "scroll-nav";
+
+$link-color: $main-text-black;
+$link-color-hover: $blue;
+$link-color-active: $black;
+$link-background-color-active: $lightnest-blue;
+
+$border-color: $light-black-second;
+$border-color-active: $blue;
+
+.#{$scroll-name}{
+  &__list {
+    list-style: none;
+  }  
+
+  &__item {
+    margin: 0;
+
+    &--active {
+      &>a.#{$scroll-name}__link {
+        font-weight: 600;
+        background-color: $link-background-color-active;
+        color: $link-color-active!important;
+        border-color: $border-color-active;
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    color: $link-color;
+    text-decoration: none;
+    padding: .5rem 1rem;
+    transition: color .3s;
+    font-weight: normal;
+
+    border-left: 2px solid $border-color;
+
+    &:hover {
+      color: $link-color-hover;
+    }
+  }
+}

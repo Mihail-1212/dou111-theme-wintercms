@@ -1,0 +1,127 @@
+description = "Макет по умолчанию"
+
+[staticPage]
+useContent = 1
+default = 0
+
+[breadcrumbs breadcrumbDefaultLayout]
+code = "sitemap"
+
+[session]
+security = "all"
+
+[cookieConsent]
+message = "Этот веб-сайт использует файлы cookie, чтобы обеспечить вам максимальное удобство на нашем веб-сайте."
+dismiss = "Понятно!"
+learnMore = "Подробнее"
+theme = "dark-bottom"
+==
+<?php
+    function onInit()
+    {
+        $this['cookiesPageUrl'] = Winter\Pages\Classes\Page::url('cookies');
+    }
+    function onStart()
+    {
+        $this['currentLocale'] = App::getLocale();
+        $this['favIconHref'] = e(Backend\Models\BrandSetting::getFavicon());
+
+        $this['currentUrl'] = Request::url();
+        $this['homePageUrl'] = $this->pageUrl('index');
+        $this['isHomePage'] = $this['currentUrl'] == $this['homePageUrl'];
+    }
+
+    function onVisuallyImpaired()
+    {
+      // Session::put('key', 'value');
+      // $value = Session::get('key', 'default');
+
+      // visually_impaired
+      $isVisuallyImpaired = Session::get('visually_impaired', false);
+
+      if ($isVisuallyImpaired) {
+        // Disable 
+        $session = Session::put('visually_impaired', false);
+      } else {
+        // Enable
+        $session = Session::put('visually_impaired', true);
+      }
+    }
+?>
+==
+{variable type="checkbox" name="static_title_show" label="Показывать заголовок страницы" tab="Страница" default="checked"}{/variable} 
+{variable type="text" name="static_title" label="Заголовок страницы" tab="Страница"}{/variable}
+
+{variable type="checkbox" name="content_nav_show" label="Показывать Связанные страницы" tab="Страница" default="checked"}{/variable} 
+{variable type="checkbox" name="scrollnav_show" label="Показывать список заголовков страницы (На этой странице)" tab="Страница" default="checked"}{/variable} 
+
+{variable type="checkbox" name="content_block_medium" label="Увеличенный блок контента (работает только при отключенном списке заголовков ИЛИ отключенном списке связанных страниц)" tab="Страница" default="checked"}{/variable} 
+{variable type="checkbox" name="content_block_big" label="Блок контента на всю страницу (работает только при отключенном списке заголовков И отключенном списке связанных страниц)" tab="Страница" default="checked"}{/variable} 
+
+
+
+<!DOCTYPE html>
+<html lang="{{ currentLocale }}">
+<head>
+    {% partial 'site/head' %}
+    {% styles %}
+    {% component 'cookieConsent' link=cookiesPageUrl  %}
+</head>
+<body>
+
+    <div id="wrapper">
+        {% partial 'site/header' %}
+
+        <div class="container-lg content">
+          
+          {% component 'breadcrumbDefaultLayout' %}
+          
+          <div class="row">
+            {% if not content_block_big %}
+                <div class="col-lg-2">
+                    {% if content_nav_show %}
+                        {% partial 'site/contentNav' %}
+                    {% endif %}
+                </div>
+            {% endif %}
+            
+            <div 
+                class="
+                {% if content_block_medium and (not scrollnav_show or not content_nav_show) %} col-lg-10 
+                {% elseif content_block_big and (not scrollnav_show and not content_nav_show) %} col-lg-12 
+                {% else %} col-lg-8 
+                {% endif %}
+                ">
+
+                {% if static_title_show and static_title %}
+                <h3>{{ static_title | raw }}</h3>
+                {% endif %}
+                
+                <div class="block" id="content">
+                    {% page %}
+                </div>
+                
+            </div>
+
+            <div class="col-lg-2">
+                {% if scrollnav_show %}
+                {% partial 'site/scrollNav' %}
+                {% endif %}
+            </div>
+        </div>
+        
+    </div>
+
+    {% partial 'site/footer' %}
+</div>
+
+<!-- Button go up  -->
+<buttton class="button button-dark button-icon button-icon-no-text ps-fixed text-decoration-none" id="toTop">
+  <div class="icon-wrapper"><span class="fas fa-chevron-up font-size-12 d-block scale-1-5"></span></div><span
+  class="text">&#x200B</span>
+</buttton>
+{% partial 'site/scripts' %}
+{% scripts %}
+
+</body>
+</html>

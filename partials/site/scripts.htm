@@ -1,0 +1,362 @@
+==
+<?php
+  function onStart()
+  {
+    $this['isVisuallyImpaired'] = Session::get('visually_impaired', false);
+  }
+?> 
+==
+
+<!-- Scripts -->
+<script src="{{ [
+'@jquery',
+'@framework',
+'@framework.extras',
+'assets/dist/js/manifest.js',
+'assets/dist/js/vendor.js',
+'assets/dist/js/app.js'
+] |theme }}"></script>
+
+
+<!-- CSRF protection  -->
+<script type="text/javascript">
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+</script>
+
+<script>
+  $(window).on("load", function (e) {
+    $btn = $("#toTop");
+
+    $(window).scroll(function () {
+      if ($(window).scrollTop() > 500) {
+        $btn.addClass('show');
+      } else {
+        $btn.removeClass('show');
+      }
+    });
+
+    $btn.click(function () {
+      //1 second of animation time
+      //html works for FFX but not Chrome
+      //body works for Chrome but not FFX
+      //This strange selector seems to work universally
+      $("html, body").animate({ scrollTop: 0 }, 500);
+    });
+  });
+
+  $(window).on("load", function (e) {
+    var $content = $(".content"),
+    contentMarginTop = $content.css('margin-top'),
+    $header = $('#header-nav'),
+    headerHeight = $header.outerHeight();
+
+    $('body').css("--header-nav-height", `${headerHeight}px`);
+    $('body').css("--content-margin-top", `calc(${contentMarginTop} + var(--header-nav-height))`);
+
+    // Scroll header
+    $(window).scroll(scrollFunc);
+
+    var $header = $('#header-nav'),
+    $content = $('.content');
+    headerSticky = $header.offset().top;
+
+    function scrollFunc() {
+      if ($(window).scrollTop() > headerSticky) {
+        $header.addClass("ps-fixed");
+        $content.addClass("header-padding");
+      } else {
+        $header.removeClass("ps-fixed");
+        $content.removeClass("header-padding");
+      }
+    }
+  });
+
+  $(document).on("ready", function (e) {
+    // Getting content
+    const content = document.querySelector('#content'),
+    insertNode = document.querySelector('.scroll-navbar-content'),
+    sectionsSelectorFixture = 'h2,h3,h4,h5,h6';
+    sectionsSelectorNotSelector = ['.noscrollnav'];
+
+
+    var sectionsSelector = sectionsSelectorFixture.split(",").map(function(fixture) {
+      var selector = fixture.trim();
+
+      sectionsSelectorNotSelector.forEach(subSelector => {
+        selector += ':not(' + subSelector + ')';
+      });
+
+      return selector;
+    }).join(',');
+
+    if ($(content).find(sectionsSelector).length == 0) {
+      $(document).find('.scroll-navbar-wrapper').remove();
+    } else {
+      if(scrollnav && content && insertNode) {
+        scrollnav.init(content, {
+          sections: sectionsSelector,
+          insertTarget: insertNode,
+          insertLocation: "append",
+          easingStyle: "linear",
+          updateHistory: false,
+        });
+      }
+    }
+  });
+  // Forms
+</script>
+
+<!-- Page load indicator -->
+<script>
+  (function(){
+    $('body').append(`
+      <div id="loading">
+      <div class="loading-title color-black-blue">
+      <h4 class="m-b-0">{{ this.theme.org_abbreviation }}</h4>
+      <h3><strong>"{{ this.theme.org_name }}"</strong> {{ this.theme.org_subname }}</h3>
+      </div>
+      <div class="loader">Loading...</div>
+      </div>
+      `);
+
+    $(window).on('load', function() {
+      $('#loading').animate({opacity: 0}, 200, function() {
+        $(this).hide();
+      });
+    });
+  })();
+</script>
+
+<!-- Additive scripts -->
+<script>
+  function copyToClipboard(text, flashText='Текст скопирован!', flashClass='success', flashInterval=3) {
+      // var $this = $(selector);
+
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val( text ).select();
+    document.execCommand("copy");
+    $temp.remove();
+
+    $.wn.flashMsg({
+      'text': flashText,
+      'class': flashClass,
+      'interval': flashInterval
+    });
+  }
+
+  function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+      );
+  }
+</script>
+
+<!-- Скрипт для слабовидящих -->
+{% if isVisuallyImpaired %}
+<script src="https://lidrekon.ru/slep/js/uhpv-full.min.js"></script> 
+
+<script>
+      // Find and override "Обычная версия" button
+  $(window).on('load', function() {
+    $('#special').find('.special-quit').first().find('button').on('click', function() {
+      $.request('onVisuallyImpaired', {
+        success: function() {
+          window.location.reload();
+        }
+      })
+    });
+  });
+</script>
+{% endif %}
+
+
+<!-- Image viewer JBOx -->
+<script>
+  $(window).on('load', function() {
+    // data-jbox-image="gallery1" title="My image"
+    new jBox('Image');
+  });
+</script>
+
+
+<!-- Paginator -->
+<script>
+  $(window).on('load', function() {
+    function updatePageList(newPageCount, listObject) {
+      listObject.page = newPageCount;
+      listObject.i=1;
+      listObject.update();
+    }
+
+    var paginationList = [];
+
+
+
+    $('.pagination-list').each(function( paginationIntex ) {
+      var $this = $(this),
+        valueNames = JSON.parse( $this.data('value-names').replaceAll("'", '"') ),
+        page = $this.data('page'),
+        pagination = !!page;
+
+      // Generate id if not have it
+      var paginatorId = $this.attr('id');
+      if (paginatorId == null || paginatorId == undefined) {
+        paginatorId = 'paginator-' + uuidv4() + '-' + paginationIntex;
+        $this.attr('id', paginatorId);
+      }
+
+      // Pagination opts
+      if (pagination) {
+        pagination = {
+          outerWindow: 1,
+          item: "<li class='m-0'><a class='page' href='javascript:;'></a></li>",
+        };
+      }
+
+      var options = {
+        valueNames,
+        page,
+        pagination,
+      };
+
+      // Disable events of <a> - links
+      // event.preventDefault();
+      $this.find('.pagination-wrapper a').each(function() {
+        $link = $(this);
+        $link.on('click', (event) => {
+          event.preventDefault(); 
+          event.stopPropagation(); 
+          return false;
+        })
+      });
+
+      // Create instance of ListJs
+      var listObj = new List(this, options);
+
+      // Search if have init func
+      // if ($this.data('init-search')) {
+      //   var searchObj = JSON.parse( $this.data('init-search').replaceAll("'", '"') );
+
+      //   for (const key in searchObj) {
+      //     const value = searchObj[key];
+
+      //     listObj.search(value, [key]);
+
+      //     return;
+      //   }
+      // }
+
+      // Push to list
+      paginationList.push( listObj );
+
+      // Add checkbox sort
+      // data-check
+      $this.find('[data-check]').each(function() {
+        var $elem = $(this),
+          listField = $elem.data('check');
+
+        if (listObj.valueNames.indexOf(listField) == -1) {
+          throw Error("List object have no this field!");
+        }
+
+        $elem.find('input[type=checkbox]').on('change', function() {
+          var checked = this.checked;
+
+          console.log('CHECKED');
+
+          listObj.filter(function(item) {
+            // Show every item
+            // item.show();
+            // If checked and is not management => hide
+            if ( checked && !Number(item.values()[listField]) ) {
+              // item.hide();
+              return false;
+            } 
+            return true;
+          });
+
+          // Set first page
+          listObject.i=1;
+          // Update on end
+          listObj.update();
+        });
+      });
+
+      // Add event listener on item-count element
+      $this.find('.items-count').on('change', function() {
+        var selectedOpt = $(this).val();
+        updatePageList(selectedOpt, listObj);
+      });
+
+      // Next and prev buttons
+      var paginationButtonList = $this.find('.pagination-wrapper').find('[data-page]');
+
+      paginationButtonList.on('click', function() {
+        var $button = $(this),
+          dataButton = $button.data('page');
+
+        var currentActive = $this.find(".pagination .active a").data('i');
+
+        if (dataButton == 'next') {
+
+          if (currentActive == Math.ceil(listObj.size() / listObj.page)){
+            console.log('Cannot go next!');
+            return;
+          }
+          // Currant num * page count + 1
+          listObj.show(currentActive*listObj.page + 1, listObj.page);
+          listObj.update();
+        } else if(dataButton == 'prev') {
+          if (currentActive == 1) {
+            console.log('Cannot go prev!');
+            return;
+          }
+          // ((Current num - 1) *  page count) - (page count - 1)
+          listObj.show((currentActive-1) * listObj.page - (listObj.page-1), listObj.page);
+          listObj.update();
+        }
+
+        // $button.addClass('active');
+      });
+
+      // Scroll up on updated
+      listObj.on('updated', function(list) {
+        var headerHeight = $( "body" ).css("--header-nav-height").replace('px',''),
+          additiveGap = 20,
+          isFirst = list.i == 1, 
+          isLast = list.i > list.matchingItems.length - list.page;
+
+        // Paginator buttons next and prev
+        paginationButtonList.each(function() {
+          var $button = $(this),
+            parentItem = $(this).parent();
+            
+
+          parentItem.removeClass('disabled');
+
+          if (isFirst) {
+            if ($button.data('page') == 'prev') {
+              parentItem.addClass('disabled');
+            }
+          }
+
+          if (isLast) {
+            if ($button.data('page') == 'next') {
+              parentItem.addClass('disabled');
+            }
+          }
+        });
+
+        // Scoll to top of list
+        $('html, body').animate({
+            scrollTop: Number($this.offset().top) - Number(headerHeight) - additiveGap,
+        }, 500);
+      });
+    });
+  });
+</script>

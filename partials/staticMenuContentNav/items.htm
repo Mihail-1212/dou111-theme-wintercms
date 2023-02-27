@@ -1,0 +1,25 @@
+{% for item in items | filter(item => not item.viewBag.isHidden) %}
+    <li role="presentation" class="m-b-1 {{ item.isActive ? 'active' : '' }} {{ item.isChildActive ? 'child-active' : '' }} {{ item.viewBag.cssClass }}">
+        {% if item.url %}
+            <a class="link {{ not item.isActive and not item.isChildActive ? 'dark-link' : ''}}" href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }}>
+                {% if level==1 %}
+                    <h6 class="line-height-normal m-0">
+                        {{ item.title }}
+                    </h6>
+                {% else %}
+                    {{ item.title }}  
+                {% endif %}
+            </a>
+        {% else %}
+            <span>{{ item.title }}</span>
+        {% endif %}
+
+        {% if item.items and (item.isActive or item.isChildActive) %}
+            <ul class="font-size-inherit m-b-0 m-t-1 m-l-2">
+                {% partial __SELF__ ~ "::items" items=item.items level=level+1 %}
+            </ul>
+        {% endif %}
+
+
+    </li>
+{% endfor %}

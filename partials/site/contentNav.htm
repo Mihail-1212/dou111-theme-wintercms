@@ -1,0 +1,21 @@
+[viewBag]
+
+[staticMenu staticMenuContentNav]
+code = "headermenu"
+==
+<?php
+
+?>
+==
+<div class="general-template-menu-wrapper scrollbar-style ps-sticky" style="
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - var(--content-margin-top) - var(--navbar-margin-top) - var(--navbar-margin-bottom));
+    top: calc(var(--content-margin-top) + var(--navbar-margin-top))
+">
+    <h5 class="letter-spacing-beauty line-height-normal m-b-4">{{ "Related pages" | _ }}</h5>
+    
+    {% component 'staticMenuContentNav' %}
+
+
+</div>

@@ -1,0 +1,131 @@
+items:
+    -
+        title: Главная
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: index
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Все статические страницы'
+        nesting: null
+        type: all-static-pages
+        url: null
+        code: ''
+        reference: null
+        cmsPage: null
+        replace: 1
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Результаты поиска'
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: search-results
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '1'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Профиль
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: profile
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+        items:
+            -
+                title: Авторизация
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: login
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '1'
+                    cssClass: ''
+                    isExternal: '0'
+    -
+        title: Корпуса
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: departaments
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+        items:
+            -
+                title: Корпус
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: departament
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '1'
+                    cssClass: ''
+                    isExternal: '0'
+    -
+        title: Услуги
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: services
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+        items:
+            -
+                title: Услуга
+                nesting: null
+                type: cms-page
+                url: null
+                code: ''
+                reference: service
+                cmsPage: null
+                replace: null
+                viewBag:
+                    isHidden: '1'
+                    cssClass: ''
+                    isExternal: '0'
+    -
+        title: Персонал
+        type: cms-page
+        code: ''
+        reference: personal
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: 'Карта сайта'

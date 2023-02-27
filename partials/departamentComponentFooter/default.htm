@@ -1,0 +1,35 @@
+<div class="row footer-border-top">
+  <a class="link" href="{{ 'departament' | page({departament_id: departament_element.id}) }}">
+    <h6>{{ departament_element.name }} {% if departament_element.is_main %}({{ "Main" | _ }}){% endif %}</h6>
+  </a>
+</div>
+<ul class="row remove-list-style">
+  <li> 
+    <span class="fas fa-map-marker-alt d-inline-block m-r-1"></span>
+    {{ departament_element.getFullAddress() }}
+  </li>
+  <li>
+    <a class="link text-decoration-none" href="tel:{{ departament_element.contact_phone }}"> 
+      <span class="fas fa-phone-alt d-inline-block m-r-1"></span>
+      <span class="text-decoration-underline-hover">
+        {{ departament_element.contact_phone }}
+      </span>
+    </a>
+  </li>
+  <li> 
+    <a class="link text-decoration-none" href="mailto:{{ departament_element.email }}"> 
+      <span class="far fa-envelope d-inline-block m-r-1"></span>
+      <span class="text-decoration-underline-hover">
+        {{ departament_element.email }}
+      </span>
+    </a>
+  </li>
+  <li>
+    <a class="link text-decoration-none" href="{{ 'departaments' | page }}"> 
+      <span class="fas fa-info-circle d-inline-block m-r-1"></span>
+      <span class="text-decoration-underline-hover">
+        {{ "Other departments" | _ }}
+      </span>
+    </a>
+  </li>
+</ul> 

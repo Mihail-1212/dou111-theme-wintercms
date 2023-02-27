@@ -1,0 +1,42 @@
+// LINKS
+$link-color: $blue;
+$link-hover-color: $dark-blue;
+$white-link-color: $white;
+
+
+// BUTTONS
+$btn-font-size: 8pt;
+$btn-line-height: 28pt;
+
+$btn-def-color: $light-black;
+$btn-def-color-border: $light-black-second;
+$btn-def-color-hover: $light-black-hover;
+$btn-def-color-border-hover: $light-black-secon-hover;
+
+$btn-cancel-color: $red;
+$btn-cancel-color-hover: $tomato-red;
+
+$btn-padding-y: 0;
+$btn-padding-x: 30px;
+$btn-padding-y-min: 8px;
+$btn-padding-x-min: 10.5px;
+
+$btn-border-radius: 4px;
+
+$btn-icon-icon-margin-x: 5px;
+$btn-icon-icon-margin-y: 3px;
+$btn-icon-icon-width: $btn-padding-x;
+$btn-icon-icon-height: calc(100% - #{$btn-icon-icon-margin-y}*2);
+$btn-icon-wrapper-border: 1px;
+
+$btn-icon-icon-eye-gap-center: .5em;
+
+$btn-icon-frame-text-gap-left: .5em;
+
+
+// FORMS
+// $input-def-height: 
+$input-padding-y: 6px;
+$input-padding-x: 10px;
+
+

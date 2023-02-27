@@ -1,0 +1,34 @@
+name: 'dou111 theme'
+description: ''
+author: ''
+homepage: ''
+code: ''
+
+form:
+    fields:
+        site_name:
+            label: Название сайта
+            comment: Название веб-сайта, как оно должно отображаться на интерфейсе
+            default: Site name
+        site_description:
+            label: Описание  сайта
+            comment: Описание веб-сайта для мета-тегов
+            default: Site description
+        org_name:
+            label: Название организации
+            comment: Название организации, как оно должно отображаться на интерфейсе
+            default: Organization name
+        org_subname:
+            label: Дополнительное название организации
+            comment: Дополнительное организации, как оно должно отображаться на интерфейсе
+            default: Organization subname
+        org_abbreviation:
+            label: Аббривиатура организации
+            comment: Аббривиатура организации, как оно должно отображаться на интерфейсе
+            default: Organization abbreviation
+        org_full_abbreviation:
+            label: Расшифровка аббривиатуры организации
+            comment: Расшифровка аббривиатуры организации, как оно должно отображаться на интерфейсе
+            default: Organization abbreviation encrypt
+
+  

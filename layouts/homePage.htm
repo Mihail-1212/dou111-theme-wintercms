@@ -1,0 +1,85 @@
+description = "Макет для главной страницы"
+
+[staticPage]
+useContent = 1
+default = 0
+
+[breadcrumbs breadcrumbDefaultLayout]
+code = "sitemap"
+
+[session]
+security = "all"
+
+[cookieConsent]
+message = "Этот веб-сайт использует файлы cookie, чтобы обеспечить вам максимальное удобство на нашем веб-сайте."
+dismiss = "Понятно!"
+learnMore = "Подробнее"
+theme = "dark-bottom"
+==
+<?php
+    function onInit()
+    {
+        $this['cookiesPageUrl'] = Winter\Pages\Classes\Page::url('cookies');
+    }
+    function onStart()
+    {
+        $this['currentLocale'] = App::getLocale();
+        $this['favIconHref'] = e(Backend\Models\BrandSetting::getFavicon());
+
+        $this['currentUrl'] = Request::url();
+        $this['homePageUrl'] = $this->pageUrl('index');
+        $this['isHomePage'] = $this['currentUrl'] == $this['homePageUrl'];
+    }
+
+    function onVisuallyImpaired()
+    {
+      // Session::put('key', 'value');
+      // $value = Session::get('key', 'default');
+
+      // visually_impaired
+      $isVisuallyImpaired = Session::get('visually_impaired', false);
+
+      if ($isVisuallyImpaired) {
+        // Disable 
+        $session = Session::put('visually_impaired', false);
+      } else {
+        // Enable
+        $session = Session::put('visually_impaired', true);
+      }
+    }
+?>
+==
+<!DOCTYPE html>
+<html lang="{{ currentLocale }}">
+<head>
+    {% partial 'site/head' %}
+    {% styles %}
+    {% component 'cookieConsent' link=cookiesPageUrl %}
+</head>
+<body>
+
+    <div id="wrapper">
+
+        {% partial 'site/header' %}
+
+        <div class="container-lg content">
+            {% component 'breadcrumbDefaultLayout' %}
+
+            {% page %}
+            {% component 'staticPage' %}
+        </div>
+
+        {% partial 'site/footer' %}
+    </div>
+
+    <!-- Button go up  -->
+    <buttton class="button button-dark button-icon button-icon-no-text ps-fixed text-decoration-none" id="toTop">
+      <div class="icon-wrapper"><span class="fas fa-chevron-up font-size-12 d-block scale-1-5"></span></div><span
+      class="text">&#x200B</span>
+  </buttton>
+
+  {% partial 'site/scripts' %}
+  {% scripts %}
+
+</body>
+</html>

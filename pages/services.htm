@@ -1,0 +1,22 @@
+title = "Услуги"
+url = "/services"
+layout = "default"
+is_hidden = 0
+
+[serviceList]
+outputCount = 0
+==
+<?php
+function onStart()
+{
+	$this['content_nav_show'] = true;
+	// $this['scrollnav_show'] = false;
+
+	$this['static_title_show'] = true;
+	$this['static_title'] = "Услуги";
+
+	$this['content_block_medium'] = true;
+}
+?>
+==
+{% component 'serviceList' %}

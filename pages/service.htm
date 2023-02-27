@@ -1,0 +1,212 @@
+title = "Услуга"
+url = "/services/:service_id"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+	$this['content_nav_show'] = true;
+	$this['scrollnav_show'] = true;
+
+	$this['static_title_show'] = true;
+
+	$serviceId = $this->param('service_id');
+
+	try
+	{
+	    $this['service'] = $service = Militarymi\Kindergarten\Models\Service::findOrFail($serviceId);
+	}
+	catch(Illuminate\Database\Eloquent\ModelNotFoundException $e)
+	{
+	    return $this->controller->run('404');
+	}
+
+	$this['static_title'] =  $service->name;
+}
+?>
+==
+{% set main_photo = service.getMainPhoto() %}
+{% set departament_list = service.departaments %}
+{% set gallery_photos = service.getGalleryPhotos() %}
+{% set personal_list = service.personal %}
+
+<div class="row">
+
+	<!-- Pohot and sale -->
+	<div class="col-md-6">
+		<a 
+			class="d-inline-block w-100" 
+			href="{{main_photo.photo_path|media}}" 
+			data-jbox-image="gallery_departament" title="{{ main_photo.caption }}">
+		  <img 
+		  	class="u-max-full-width img-cover w-100"
+		  	style="height: 500px;" 
+		  	src="{{main_photo.photo_path|media}}" alt="{{ main_photo.caption }}">
+		</a>
+	</div>
+
+	<div class="col-md-6">
+		<div class="sale-wrapper block col-12 m-t-2">
+
+			<div class="sale d-flex">
+				<div class="price flex-grow-1 font-size-18 color-black-blue font-w-bold">
+					<h6 class="m-0">{{ 'Price' | _ }}:</h6>
+					{{ service.price }} ₽
+				</div>
+
+				<div class="sale-controls d-flex align-items-end">
+					<a href="{{ service.link }}" class="button button-p-min button-dark m-0" target="_blank">
+						Написать через ВК
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="col-12">
+			<div class="departaments m-t-2 m-b-2">
+				{% if departament_list is not empty %}
+					<h5>{{ 'Departaments' | _ }}:</h5>
+					<ul class="m-b-0 remove-list-style">
+						{% for departament_item in departament_list %}
+							{% set departament_short_address = departament_item.getShortAddress() %}
+
+							<li>
+								<div class="list-inner block">
+									<div class="row">
+										<div class="col-12">
+											{% if departament_item.is_main %}
+											    <i class="fas fa-city"></i>
+											{% else %}
+												<i class="far fa-building"></i>
+											{% endif %}
+											{{ departament_item.name | ucfirst }} ({{ departament_short_address }})
+										</div>
+
+										<div class="col-12">
+											<a class="link" href="{{ 'departament' | page({departament_id: departament_item.id}) }}">
+												{{ 'More about departament' | _ }} <i class="fas fa-external-link-alt"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<!-- Description and duration -->
+	<hr class="m-t-2 m-b-2" />
+	<div class="col-12">
+		<div class="description-wrapper">
+			<h4 class="font-w-bold">{{ 'Description' | _ }}:</h4>
+
+			<div class="description">
+				{{ service.description | raw }}
+			</div>
+		</div>
+
+		<div class="duration-wrapper align-center d-flex justify-content-end" style="gap: .8rem;">
+			<h6 class="font-w-bold m-0">{{ 'Duration' | _ }}:</h6>
+			<div class="duration">
+				{{ service.duration | raw }}
+			</div>
+		</div>
+	</div>
+
+	<!-- Gallery -->
+	{% if gallery_photos is not empty %}
+	    <hr class="m-t-2 m-b-2" />
+		<div class="col-12">
+			<div class="gallery">
+				<h4 class="font-w-bold">{{ 'Gallery' | _ }}:</h4>
+
+				{% for service_photo in gallery_photos %}
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<a 
+							class="d-inline-block w-100 grayscale hover-normal" 
+							href="{{service_photo.photo_path|media}}" 
+							data-jbox-image="gallery_service" title="{{ service_photo.caption }}">
+						  <img 
+						  	class="u-max-full-width img-cover w-100"
+						  	style="height: 100px;" 
+						  	src="{{service_photo.photo_path|media}}" alt="{{ service_photo.caption }}">
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+
+	<!-- Personal -->
+	{% if personal_list is not empty %}
+		<hr class="m-t-2 m-b-2" />
+		<div class="col-12">
+			<div class="personal">
+				<h4 class="font-w-bold">{{ 'Personal' | _ }}:</h4>
+
+				<div class="row gy-3">
+
+					
+					{% for personal_item in personal_list %}
+						{% set full_name = personal_item.getFullName() %}
+					    {% set personal_departament = personal_item.departament %}
+					    {% set personal_job_position = personal_item.job_position %}
+
+						<div class="col-lg-4 col-sm-6 m-b-1">
+					      <div class="tile d-grid rows-half min-height-normal">
+
+					      	<a 
+								class="d-inline-block w-100" 
+								href="{{personal_item.photo_path|media}}" 
+								data-jbox-image="personal_service" title="{{ full_name }}">
+							  <img 
+							  	class="u-max-full-width img-cover w-100"
+							  	style="height: 150px;" 
+							  	src="{{personal_item.photo_path|media}}" alt="{{ full_name }}">
+							</a>
+
+					        <div class="tile-body">
+					          <div class="card-text">
+
+					            <p class="m-0 mb-3">{{ full_name }}</p>
+					            <p class="m-0 font-size-10">
+					              {{ personal_job_position.name | ucfirst }}
+					            </p>
+					            <p class="m-0 font-size-10">
+					                <strong>{{ personal_departament.name }}</strong>
+					            </p>
+					            <p class="control">
+					            	<!-- Add anchor -->
+					            	<a href="{{ 'personal' | page({ full_name:full_name }) }}?{{ {'full_name': full_name} | url_encode }}" target="_blank" >
+
+					            		{{ 'More about personal' | _ }} <i class="fas fa-external-link-alt"></i>
+					            	</a>
+					            </p>
+					          </div>
+					        </div>
+					      </div>
+					    </div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	{% endif %}
+	
+	<!-- Go back block -->
+	<hr class="m-t-4 m-b-2" />
+
+	<div class="row">
+		<h4 class="text-right">
+			<a href="{{ 'services' | page }}" class="link">
+				<i class="fas fa-undo-alt"></i>
+				{{ 'Go back' | _ }}
+			</a>
+		</h4>
+	</div>
+</div>

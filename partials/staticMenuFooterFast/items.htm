@@ -1,0 +1,18 @@
+{% for item in items | filter(item => not item.viewBag.isHidden) %}
+    <div role="presentation" class="{{ item.isActive ? 'active' : '' }} {{ item.isChildActive ? 'child-active' : '' }} {{ item.viewBag.cssClass }} row {{ loop.first ?  'footer-border-top' : ''}}">
+        {% if item.url %}
+            <a class="link" href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }}>
+                <h6>
+                    {{ item.title }}
+                </h6>
+            </a>
+        {% else %}
+            <span>{{ item.title }}</span>
+        {% endif %}
+
+        <!-- Hide submenus -->
+       <!--  {% if item.items %}
+            <ul>{% partial __SELF__ ~ "::items" items=item.items %}</ul>
+        {% endif %} -->
+    </div>
+{% endfor %}

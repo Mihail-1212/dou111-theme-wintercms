@@ -1,0 +1,304 @@
+// Utils scss file
+@import '_spacing-helpers.scss';
+@import '_size-helpers.scss';
+@import '_hover-effects.scss';
+@import '_font-size-helpers.scss';
+@import '_media-mixin.scss';
+@import 'color-helper.scss';
+
+
+// block utils
+.d-flex {
+  display: flex!important;
+}
+
+.flex-direction-col {
+  flex-direction: column!important;
+}
+
+.flex-direction-row {
+  flex-direction: row!important;
+}
+
+.fwrap-wrap {
+  flex-wrap: wrap!important;
+}
+
+.fwrap-nowrap {
+  flex-wrap: nowrap!important;
+}
+
+.fwrap-reverse {
+  flex-wrap: wrap-reverse!important;
+}
+
+.justify-center {
+  justify-content: center!important;
+}
+
+.justify-start {
+  justify-content: start!important;
+}
+
+.justify-end {
+  justify-content: end!important;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.d-inline-block {
+  display: inline-block!important;
+}
+
+.d-block {
+  display: block!important;
+}
+
+.d-inline-flex {
+  display: inline-flex!important;
+}
+
+.d-none {
+  display: none!important;
+}
+
+.d-grid {
+  display: grid!important;
+}
+
+.rows-half {
+  grid-template-rows: 1fr 1fr!important;
+}
+
+.cols-half {
+  grid-template-columns: 1fr 1fr!important;
+}
+
+// text utils
+.text-uppercase {
+  text-transform: uppercase!important;
+}
+
+.text-lowercase {
+  text-transform: lowercase!important;
+}
+
+.text-capitalize {
+  text-transform: capitalize!important;
+}
+
+.font-w-normal {
+  font-weight: normal!important;
+}
+
+.font-w-bold {
+  font-weight: bold!important;
+}
+
+.font-w-bolder {
+  font-weight: bolder!important;
+}
+
+.font-w-lighter {
+  font-weight: lighter!important;
+}
+
+.font-w-medium {
+  font-weight: medium!important;
+}
+
+
+
+.img-contain {
+  object-fit: contain!important;
+}
+
+.img-cover {
+  object-fit: cover!important;
+}
+
+
+
+.remove-list-style {
+  list-style-type: none;
+}
+
+
+.scale-1-2 {
+  transform: scale(1.2)!important;
+}
+
+.scale-1-5 {
+  transform: scale(1.5)!important;
+}
+
+.scale-2 {
+  transform: scale(2)!important;
+}
+
+.scale-2-5 {
+  transform: scale(2.5)!important;
+}
+
+.scale-3 {
+  transform: scale(3)!important;
+}
+
+
+.shadow-box-normal {
+  box-shadow: $block-shadow!important;
+}
+
+
+.border-none {
+  border: none!important;
+}
+
+.border-radius-0 {
+  border-radius: 0!important;
+}
+
+
+.text-center {
+  text-align: center!important;
+}
+
+.text-right {
+  text-align: right!important;
+}
+
+.text-left {
+  text-align: left!important;
+}
+
+.text-justify {
+  text-align: justify!important;
+}
+
+
+.ps-fixed {
+  position: fixed!important;
+}
+
+.ps-sticky {
+  position: sticky!important;
+}
+
+.ps-relative {
+  position: relative!important;
+}
+
+.ps-absolute {
+  position: absolute!important;
+}
+
+
+// .fade-in {
+//   animation: fade-in 0.2s;
+// }
+
+// .fade-out {
+//   animation: fade-out 0.2s;
+// }
+
+// @keyframes fade-in {
+//   0% {
+//     opacity: 0;
+//     visibility: visible;
+//   }
+//   100% {
+//     opacity: 1;
+//     visibility: visible;
+//   }
+// }
+
+// @keyframes fade-out {
+//   0% {
+//     opacity: 1;
+//     visibility: visible;
+//   }
+//   100% {
+//     opacity: 0;
+//     visibility: visible;
+//   }
+// }
+
+$scrollbar-track-color: $light-gray;
+$scrollbar-track-thumb: $gray;
+
+.scrollbar-style::-webkit-scrollbar-track
+{
+	// -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: $scrollbar-track-color;
+}
+
+.scrollbar-style::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: $scrollbar-track-color;
+}
+
+.scrollbar-style::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	// -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: $scrollbar-track-thumb;
+}
+
+// Overflow
+.overflow-visible {
+  overflow: visible!important;
+}
+
+.overflow-hidden {
+  overflow: hidden!important;
+}
+
+.overflow-auto {
+  overflow: auto!important;
+}
+
+.overflow-x-auto {
+  overflow-x: auto!important;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden!important;
+}
+
+.overflow-y-auto {
+  overflow-y: auto!important;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden!important;
+}
+
+
+.child-text-my0 {
+  p, h1,h2,h3,h4,h5,h6, strong, em, i, b, mark, small, del, ins, sub, sup {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+
+.letter-spacing-beauty {
+  letter-spacing: 1.5px!important;
+}
+
+.line-height-normal {
+  line-height: normal!important;
+}
+
+
+.selection-none {
+  user-select: none!important; 
+}
+
+.cursor-pointer {
+  cursor: pointer!important; 
+}

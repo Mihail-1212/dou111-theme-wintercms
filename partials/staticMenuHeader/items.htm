@@ -1,0 +1,24 @@
+{% for item in items | filter(item => not item.viewBag.isHidden) %}
+    <li role="presentation" class="{{ item.isActive ? 'current-page' : '' }} {{ item.isChildActive ? 'child-active' : '' }} {{ item.viewBag.cssClass }}">
+        {% if item.url %}
+            <a href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }}>
+                {{ item.title }}
+            </a>
+        {% else %}
+            {{ item.title }}
+        {% endif %}
+
+        {% if item.items %}
+            <ul>
+                <li role="presentation" class="font-w-bold">
+                    <a href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }}>
+                        <span>
+                            {{ item.title }}
+                        </span>
+                    </a>
+                </li>
+                {% partial __SELF__ ~ "::items" items=item.items %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}

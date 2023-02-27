@@ -1,0 +1,115 @@
+title = "Профиль"
+url = "/user/profile"
+layout = "default"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "login"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+==
+<?php
+function onStart()
+{
+	$this['content_nav_show'] = true;
+
+	$this['static_title_show'] = true;
+	$this['static_title'] = "Профиль";
+}
+?>
+==
+<!-- For auth user only -->
+{% if user %}
+
+    <!-- activation_check -->
+
+    {% if not user.is_activated %}
+
+        <h3>{{ "Your email address has not yet been verified." | _ }}</h3>
+        <p>
+            {{ "You should verify your account otherwise it may be deleted. Please check your email to verify." | _ }}
+            <a href="javascript:;" data-request="onSendActivationEmail">{{ "Send the verification email again." | _ }}</a>
+        </p>
+
+    {% endif %}
+
+    <!-- Update -->
+
+    {{ form_ajax('onUpdate') }}
+
+        <div class="row">
+            <div class="form-group col-12">
+                <label for="accountName">{{ "Full Name" | _ }}</label>
+                <input name="name" type="text" class="form-control u-full-width" id="accountName" value="{{ user.name }}">
+            </div>
+
+            <div class="form-group col-12">
+                <label for="accountEmail">{{ "Email" | _ }}</label>
+                <input name="email" type="email" class="form-control u-full-width" id="accountEmail" value="{{ user.email }}">
+            </div>
+
+            <div class="form-group col-12">
+                <label for="accountPassword">{{ "New Password" | _ }}</label>
+                <input name="password" type="password" class="form-control u-full-width" id="accountPassword">
+            </div>
+
+            <div class="form-group col-12">
+                <label for="accountPasswordConfirm">{{ "Confirm New Password" | _ }}</label>
+                <input name="password_confirmation" type="password" class="form-control u-full-width" id="accountPasswordConfirm">
+            </div>
+
+            {% if updateRequiresPassword %}
+                <p>{{ "To change these details, please confirm your current password." | _ }}</p>
+                <div class="form-group col-12">
+                    <label for="accountPasswordCurrent">{{ "Current Password" |  _ }} <small class="text-danger">* {{ "required"  | _ }}</small></label>
+                    <input name="password_current" type="password" class="form-control u-full-width" id="accountPasswordCurrent">
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="button button-primary">{{ "Save" | _ }}</button>
+
+    {{ form_close() }}
+
+
+    <!-- Deactivate account -->
+
+    <a
+        href="javascript:;"
+        class="link color-tomato-red"
+        onclick="$('#accountDeactivateForm').toggle()">
+        {{ "Deactivate account" | _ }}
+    </a>
+
+    <div id="accountDeactivateForm" style="display: none">
+        {{ form_ajax('onDeactivate') }}
+            <hr />
+            <h3 class="m-t-2">{{ "Deactivate account" | _ }}?</h3>
+            <p>
+                {{ "Your account will be disabled and your details removed from the site. You can reactivate your account any time by signing back in." | _ }}
+            </p>
+            <div class="form-group">
+                <label for="accountDeletePassword">{{ "To continue, please enter your password:" | _ }}</label>
+                <input name="password" type="password" class="form-control" id="accountDeletePassword" />
+            </div>
+
+            <div class="controls-group d-flex flex-column align-items-start">
+                <button type="submit" class="button button-cancel">
+                    {{ "Confirm Deactivate Account" | _ }}
+                </button>
+                <a
+                    href="javascript:;"
+                    class="link"
+                    onclick="$('#accountDeactivateForm').toggle()">
+                    {{ "I changed my mind" | _ }}
+                </a>
+            </div>
+            
+        {{ form_close() }}
+    </div>
+
+{% endif %}

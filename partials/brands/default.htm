@@ -1,0 +1,38 @@
+<div class="brands" id="paginated-brands">
+
+    <div class="row g-5">
+        
+        {% for brand in __SELF__.brands %}
+
+        <div class="item-wrapper col-md-{{ __SELF__.columnSize }}">
+
+            <a 
+                class="item tile shadow-box-hoverable d-flex flex-column p-3 cursor-pointer unstyled-link" 
+                href="{{ brand.url }}"
+                {% if brand.external_link %} target="_blank"{% endif %}>
+
+                <div class="img-wrapper flex-grow-1">
+                    {% if brand.logo %}
+                    <img 
+                        src="{{ brand.logo.getThumb(__SELF__.logoWidth, __SELF__.logoHeight, 'auto') }}" alt="{{ brand.name }}" 
+                        class="img-contain u-full-width u-max-full-width h-100" />
+                    {% endif %}
+                </div>
+
+                <div class="text-wrapper font-size-10 m-t-1">
+                    {{ brand.name }}
+                </div>
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="row">
+        {% partial __SELF__ ~ "::paginating" items=__SELF__.brands pagePath=__SELF__.pagePath %}
+    </div>
+
+</div>

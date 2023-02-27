@@ -1,0 +1,83 @@
+@import '../variables/colors.scss';
+@import '../variables/block_variables.scss';
+
+@import '../utils/media-mixin.scss';
+
+// Внешний вид структуры блочной структуры сайта
+
+
+.block {
+  background-color: $white;
+  border-radius: $block-border-radius;
+  padding: $block-padding-y $block-padding-x!important;
+
+  box-shadow: $block-shadow;
+}
+
+@media (min-width: 40rem) {
+  .block {
+    padding: $block-padding-y $block-padding-x!important;
+  }
+}
+
+
+// Override css framework
+
+.row {
+  // max-width: 100%;
+
+  &.page-row {
+    &:not(:last-child) {
+      margin-bottom: $container-row-gap;
+    }
+  }
+}
+
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// .row {
+//   --bs-gutter-x: 1.5rem;
+//   --bs-gutter-y: 0;
+//   margin-top: calc(-1 * var(--bs-gutter-y));
+//   margin-right: calc(-0.5 * var(--bs-gutter-x));
+//   margin-left: calc(-0.5 * var(--bs-gutter-x));
+// }
+
+// .row > * {
+//   padding-right: calc(var(--bs-gutter-x) * 0.5);
+//   padding-left: calc(var(--bs-gutter-x) * 0.5);
+//   margin-top: var(--bs-gutter-y);
+// }
+
+// // Container
+// @include s_400 {
+//   .container {
+//     width: 100%;
+//     padding: 0;
+//   }
+// }
+
+// @include s_1000 {
+//   .container {
+//     width: 80%;
+//     padding: 0;
+//   }
+// }
+
+// // Columns
+
+// @include s_1000 {
+//   .three.columns{ 
+//     width: 48%;
+//   }
+// }
+
+// @include s_1200 {
+//   .three.columns{ 
+//     width: 22%;
+//   }
+// }

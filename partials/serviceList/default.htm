@@ -1,0 +1,184 @@
+<div class="row gy-3">
+
+    <div class="pagination-list" 
+        data-value-names="['name', 'price', 'departaments', 'duration', 'external-link']" 
+        data-page="3"
+        >
+
+    <div class="pagination-controls m-t-2">
+
+        <div class="row gx-2 m-b-1">
+            <div class="col-8 flex-grow-1">
+                <input class="search u-full-width m-0" 
+                type="text" 
+                placeholder="{{ 'Type to search and press "Enter"' | _ }}" />
+            </div>
+
+            <div class="col-auto">
+                <select class="items-count p-t-0 p-b-0 h-100 m-0 p-l-1">
+
+                    <option value="3">3</option>
+                    <option value="9">9</option>
+                    <option value="15">15</option>
+                    <option value="21">21</option>
+
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 flex-grow-1">
+                <div class="sort-text d-inline-block">
+                    {{ 'Sort' | _ }}: 
+                </div>
+
+                <span class="sort sort-control link cursor-pointer selection-none" data-sort="name">
+                    {{ 'Sort by name' | _ }}
+
+                    <span class="sort-control-asc mx-2 color-black-blue">
+                        <i class="fas fa-sort-alpha-up scale-1-5"></i>
+                    </span>
+
+                    <span class="sort-control-desc mx-2 color-tomato-red">
+                        <i class="fas fa-sort-alpha-up-alt scale-1-5"></i>
+                    </span>
+                </span>
+
+                |
+
+                <span class="sort sort-control link cursor-pointer selection-none" data-sort="price">
+                    {{ 'Sort by price' | _ }}
+
+                    <span class="sort-control-asc mx-2 color-black-blue">
+                        <i class="fas fa-sort-numeric-up scale-1-5"></i>
+                    </span>
+
+                    <span class="sort-control-desc mx-2 color-tomato-red">
+                        <i class="fas fa-sort-numeric-up-alt scale-1-5"></i>
+                    </span>
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+<hr class="m-t-1 m-b-4" />
+
+<ul class="remove-list-style row list gx-4">
+
+    {% for service_item in service_list %} 
+    {% set main_photo = service_item.getMainPhoto() %}
+    {% set departament_list = service_item.departaments %}
+
+    <!-- li.col-12 -->
+    <!-- li.col-4 -->
+    <li class="m-b-2 col-12">
+        <div class="wrapper row block">
+
+            <!-- div.col-3 -->
+            <!-- div.col-12 -->
+            <div class="col-3">
+                <a 
+                class="d-inline-block w-100" 
+                href="{{main_photo.photo_path|media}}" 
+                data-jbox-image="gallery_departament" title="{{ main_photo.caption }}">
+                    <img 
+                    class="u-max-full-width img-cover w-100"
+                    style="height: 200px;" 
+                    src="{{main_photo.photo_path|media}}" alt="{{ main_photo.caption }}">
+                </a>
+            </div>
+
+            <!-- div.col-6 -->
+            <!-- div.col-12 -->
+            <div class="col-6 d-flex flex-direction-col">
+                <!-- NAME DURATION DEPARTAMENTS -->
+                <div class="name font-size-14">
+                    {{ service_item.name }}
+                </div>
+
+                <div class="departaments flex-grow-1 font-w-lighter font-size-12">
+                    <ul class="m-t-1 m-l-0">
+                        {% for departament in departament_list %}
+                        {% set departament_short_address = departament.getShortAddress() %}
+                        <li class="m-0">
+                            {{ departament.name | ucfirst }} ({{ departament_short_address }})
+<!--                             <a href="#">
+
+                            </a> -->
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+                <div class="duration font-size-10 m-b-1">
+                    {{ service_item.duration }}
+                </div>
+            </div>
+
+            <!-- div.col-3 -->
+            <!-- div.col-12 -->
+            <div class="col-3">
+                <!-- m-b-2 -->
+                <!-- m-0 -->
+                <div class="price font-size-24 font-w-bold text-right m-b-2">
+                    {{ service_item.price }} ₽
+                </div>
+
+                <!--  -->
+                <!-- flex-row-reverse -->
+                <div class="controls-block d-flex align-center justify-content-end">
+                    <div class="external-link">
+                        <a
+                        class="button button-icon button-icon-no-text my-auto m-r-1 button-info-desktop d-lg-flex text-decoration-none"
+                        href="{{ service_item.link }}"
+                        target="_blank">
+                            <div class="icon-wrapper">
+                                <span class="fas fa-external-link-alt font-size-14 d-block"></span>
+                            </div>
+
+                            <span class="text">&#x200B</span>
+                        </a>
+                    </div>
+
+                    <!--  -->
+                    <!-- m-r-1 -->
+                    <div class="link">
+                        <a href="{{ 'service' | page({service_id: service_item.id}) }}" class="button m-0">
+                            {{ 'More' | _ }}
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </li>
+    {% endfor %}
+
+</ul>
+
+<div class="pagination-wrapper block font-size-16 overflow-hidden m-b-1 d-flex justify-center align-center">
+
+    <li class="remove-list-style m-0 font-size-12 control-button disabled">
+        <a href="#" class="page" data-page="prev" >
+            <i class="fas fa-chevron-left"></i>
+        </a>
+    </li>
+
+    <ul class="pagination remove-list-style d-flex justify-center align-center m-0"></ul>
+
+    <li class="remove-list-style m-0 font-size-12 control-button">
+        <a href="#" class="page" data-page="next">
+            <i class="fas fa-chevron-right"></i>
+        </a>
+    </li>
+</div>
+
+</div>
+
+</div>

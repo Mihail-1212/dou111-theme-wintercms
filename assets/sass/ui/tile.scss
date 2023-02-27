@@ -1,0 +1,53 @@
+$tile-border-radius: $block-border-radius;
+$tile-background: $white;
+$tile-border-color: $btn-def-color-border;
+$tile-padding-x: 1rem;
+$tile-padding-y: 1rem;
+
+
+.tile {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: $tile-background;
+  border-radius: $tile-border-radius;
+  border: 1px solid $tile-border-color;
+  overflow: hidden;
+  transition: $transition;
+
+  &.active {
+    border-color: $dark-blue;
+
+    .icon {
+      color: $black-blue;
+    }
+
+    .tile-body {
+      color: $dark-blue;
+    }
+  }
+
+  &.min-height-normal {
+    min-height: 250px;
+  }
+
+  .tile-body {
+    padding: $tile-padding-y $tile-padding-x;
+
+    .tile-title-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+
+    .tile-title {
+      font-size: 2.5rem;
+    }
+
+    .tile-subtitle {
+      font-size: 1.5rem;
+    }
+  }
+}

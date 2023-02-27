@@ -1,0 +1,202 @@
+title = "Корпус"
+url = "/departaments/:departament_id"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+	$this['content_nav_show'] = true;
+	$this['scrollnav_show'] = true;
+
+	$this['static_title_show'] = true;
+
+	$departamentId = $this->param('departament_id');
+
+	try
+	{
+	    $this['departament'] = $departament = Militarymi\Kindergarten\Models\Departament::findOrFail($departamentId);
+	}
+	catch(Illuminate\Database\Eloquent\ModelNotFoundException $e)
+	{
+	    return $this->controller->run('404');
+	}
+
+	$this['static_title'] = ($departament->is_main ? '<i class="fas fa-city"></i>' : '<i class="far fa-building"></i>') . ' ';
+	$this['static_title'] = $this['static_title']  . $departament->name . ($departament->is_main ? " (Главный)" : "");
+}
+?>
+==
+{% set main_photo = departament.departament_photos.first %}
+{% set personal_list = departament.personal |slice(0, 5) %}
+
+<div class="row">
+	<!-- d-sm-none d-md-block -->
+	<div class="col-12">
+		<a 
+			class="d-inline-block w-100" 
+			href="{{main_photo.photo_path|media}}" 
+			data-jbox-image="gallery_departament" title="{{ main_photo.caption }}">
+		  <img 
+		  	class="u-max-full-width img-cover w-100"
+		  	style="height: 200px;" 
+		  	src="{{main_photo.photo_path|media}}" alt="{{ main_photo.caption }}">
+		</a>
+	</div>
+
+	<div class="col-md-6 col-sm-12">
+		<h6 class="d-none">
+			<strong>{{ 'Address' | _ }}:</strong>
+		</h6>
+		<p class="font-size-12">
+			{{ departament.getShortAddress() }}
+		</p>
+	</div>
+
+	<div class="col-md-6 col-sm-12">
+		<h6 class="m-0 font-size-10">
+			{{ 'Phone' | _ }}:
+		</h6>
+
+		<p class="font-size-12">
+			{{ departament.contact_phone }}
+		</p>
+	</div>
+
+	<hr />
+
+	<div class="col-md-6 col-sm-12">
+		<h6 class="m-0 font-size-10">
+			{{ 'Email' | _ }}:
+		</h6>
+
+		<p class="font-size-12">
+			{{ departament.email }}
+		</p>
+	</div>
+
+	<div class="col-md-6 col-sm-12">
+		<h6 class="m-0 font-size-10">
+			{{ 'Controls' | _ }}:
+		</h6>
+
+		<a class="button button-icon color-black-blue text-decoration-none"
+        	href="tel:{{ departament.contact_phone }}">
+            <div class="icon-wrapper">
+              <i class="icon fas fa-phone-alt font-size-12"></i>
+            </div>
+            <div class="text text-decoration-underline-hover">
+              {{ "Call" | _ }} 
+            </div>
+		</a>
+
+		<a class="button button-icon text-decoration-none"
+        	href="mailto:{{ departament.email }}">
+            <div class="icon-wrapper">
+              <i class="icon fas fa-at font-size-12"></i>
+            </div>
+            <div class="text text-decoration-underline-hover">
+              {{ "Email" | _ }} 
+            </div>
+		</a>
+
+		<a class="button button-icon color-tomato-red text-decoration-none"
+			href="javascript:;"
+			data-address="{{ departament.getFullAddress() }}"
+			onclick="copyToClipboard($(this).data('address'), 'Адрес скопирован!')"
+			>
+			<div class="icon-wrapper">
+			  <i class="icon fas fa-map-marker-alt font-size-12"></i>
+			</div>
+			<div class="text text-decoration-underline-hover">{{ "Copy address" | _ }} </div>
+		</a>
+	</div>
+
+	<hr />
+
+	<div class="col-12">
+		<h4>{{ 'Gallery' | _ }}</h4>
+	</div>
+
+	<!-- Gallery -->
+	{% for departament_photo in departament.departament_photos %}
+		<div class="col-lg-3 col-md-4 col-sm-6">
+			<a 
+				class="d-inline-block w-100 grayscale hover-normal" 
+				href="{{departament_photo.photo_path|media}}" 
+				data-jbox-image="gallery_departament" title="{{ departament_photo.caption }}">
+			  <img 
+			  	class="u-max-full-width img-cover w-100"
+			  	style="height: 100px;" 
+			  	src="{{departament_photo.photo_path|media}}" alt="{{ departament_photo.caption }}">
+			</a>
+		</div>
+	{% endfor %}
+
+	<!-- Personal -->
+	{% if personal_list is not empty %}
+		<hr class="m-t-2 m-b-2" />
+		<div class="col-12">
+			<div class="personal">
+				<h4 class="font-w-bold">{{ 'Personal' | _ }}:</h4>
+
+				<div class="row gy-3">
+
+					
+					{% for personal_item in personal_list %}
+						{% set full_name = personal_item.getFullName() %}
+					    {% set personal_departament = personal_item.departament %}
+					    {% set personal_job_position = personal_item.job_position %}
+
+						<div class="col-lg-4 col-sm-6 m-b-1">
+					      <div class="tile d-grid rows-half min-height-normal">
+
+					      	<a 
+								class="d-inline-block w-100" 
+								href="{{personal_item.photo_path|media}}" 
+								data-jbox-image="personal_service" title="{{ full_name }}">
+							  <img 
+							  	class="u-max-full-width img-cover w-100"
+							  	style="height: 150px;" 
+							  	src="{{personal_item.photo_path|media}}" alt="{{ full_name }}">
+							</a>
+
+					        <div class="tile-body">
+					          <div class="card-text">
+
+					            <p class="m-0 mb-3">{{ full_name }}</p>
+					            <p class="m-0 font-size-10">
+					              {{ personal_job_position.name | ucfirst }}
+					            </p>
+					            <p class="m-0 font-size-10">
+					                <strong>{{ personal_departament.name }}</strong>
+					            </p>
+					            <p class="control">
+					            	<!-- Add anchor -->
+					            	<a href="{{ 'personal' | page({ full_name:full_name }) }}?{{ {'full_name': full_name} | url_encode }}" target="_blank" >
+
+					            		{{ 'More about personal' | _ }} <i class="fas fa-external-link-alt"></i>
+					            	</a>
+					            </p>
+					          </div>
+					        </div>
+					      </div>
+					    </div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<hr class="m-t-4 m-b-2" />
+
+	<div class="row">
+		<h4 class="text-right">
+			<a href="{{ 'departaments' | page }}" class="link">
+				<i class="fas fa-undo-alt"></i>
+				{{ 'Go back' | _ }}
+			</a>
+		</h4>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+$footer-background-color: $soft-black;
+$footer-font-color: $gray-clouds;
+
+$footer-link-color: $white;
+$footer-link-color-hover: $light-black-second;
+
+$footer-border-block-color: $light-gray;
+
+footer {
+  background-color: $footer-background-color;
+  color: $footer-font-color;
+
+  a {
+    color:$footer-link-color!important;
+
+    &:hover,
+    &:focus {
+      color: $footer-link-color-hover!important;
+    }
+  }
+}
+
+.footer-border-top {
+  border-top: 1px solid $footer-border-block-color;
+}

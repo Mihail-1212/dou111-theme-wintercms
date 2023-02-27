@@ -1,0 +1,23 @@
+
+
+$size-index: 0;
+@while $size-index <= 100 {
+  .h-#{$size-index} {
+    height: $size-index * 1%!important;
+  }
+
+  .w-#{$size-index} {
+    width: $size-index * 1%!important;
+  }
+
+  // Increase index
+  $size-index: $size-index + 5;
+}
+
+.w-a {
+  width: auto!important;
+}
+
+.h-a {
+  height: auto!important;
+}

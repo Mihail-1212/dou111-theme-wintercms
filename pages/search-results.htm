@@ -1,0 +1,44 @@
+title = "Страница результатов поиска"
+url = "/search-results"
+layout = "default"
+is_hidden = 0
+
+[searchResults]
+resultsPerPage = 10
+showProviderBadge = 0
+noResultsMessage = "Ваш поиск не дал результатов."
+visitPageMessage = "Посетить страницу"
+
+[linkList]
+В Контакте = 1
+linkTarget = "_blank"
+==
+<?php
+function onStart()
+{
+	$this['content_nav_show'] = true;
+}
+function onInit()
+{
+		// REMOVE "ru/" FROM URL!!!
+    \Event::listen('offline.sitesearch.results', function ($results) {
+        // return $results->filter(...);
+        // return $results->sortByDesc('model.custom_attribute');
+
+				$this['testRes'] = $results->map(function ($result) {
+					$url = $result->url;
+					// Remove before / symb (remove "ru/")
+					$newUrl = substr($url, strpos($url, '/') + 1);
+
+					$result->setUrl($newUrl);
+					return $result;
+				});
+
+				$this['testRess'] = $this['testRes']->results();
+
+				return $this['testRes'];
+    });
+}
+?>
+==
+{% component 'searchResults' %}

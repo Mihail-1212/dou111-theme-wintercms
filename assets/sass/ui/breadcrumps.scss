@@ -1,0 +1,64 @@
+$breadcrumb-font-size: 10pt;
+
+.breadcrumps-row {
+
+  .breadcrumb {
+    --bs-breadcrumb-item-padding-x: 10px;
+
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+
+    font-size: $breadcrumb-font-size;
+
+    margin: 0;
+
+    .breadcrumb-item {
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    // Every second item
+    & .breadcrumb-item+.breadcrumb-item {
+      padding-left: var(--bs-breadcrumb-item-padding-x);
+
+      &::before {
+        --bc-arr-border-color: #{$main-text-black};
+        --bc-arr-border-width: 2px;
+        --bc-arr-border-size: 2px;
+        --bc-arr-margin-right: 10px;
+
+        content: "";
+        display: inline-block;
+        padding: var(--bc-arr-border-size);
+        margin-right: var(--bc-arr-margin-right);
+        border: solid var(--bc-arr-border-color);
+        border-width: 0 var(--bc-arr-border-width) var(--bc-arr-border-width) 0;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+      }
+    }
+
+    // Total breadcrump link
+    a {
+      $link-color: $dark-gray;
+      $link-color-hover: $main-text-black;
+
+      text-decoration: none;
+      color: $link-color;
+      transition: .4s;
+
+      &:hover,
+      &:focus {
+        color: $link-color-hover;
+        text-decoration: underline;
+      }
+    }
+
+  }
+}

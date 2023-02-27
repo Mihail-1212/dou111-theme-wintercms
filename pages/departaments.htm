@@ -1,0 +1,23 @@
+title = "Корпуса"
+url = "/departaments"
+layout = "default"
+description = "return list of departaments of current organization"
+is_hidden = 0
+
+[departamentList]
+outputCount = 0
+
+[siteSearchInclude]
+==
+<?php
+function onStart()
+{
+	$this['content_nav_show'] = true;
+	$this['scrollnav_show'] = true;
+
+	$this['static_title_show'] = true;
+	$this['static_title'] = "Корпуса";
+}
+?>
+==
+{% component 'departamentList' %}

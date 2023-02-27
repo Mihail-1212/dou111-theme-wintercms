@@ -1,0 +1,83 @@
+
+// Using
+//.div {
+//   @include _1170 {
+//       @content;
+//   }
+//}
+//media_mixin.scss
+
+
+@mixin xxl {
+  @media (min-width: 1400px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+
+
+@mixin xs {
+  @media (min-width: 0) {
+    @content;
+  }
+}
+
+
+
+// /* Larger than Desktop HD */
+// @mixin s_1200 {
+//   @media (min-width: 1200px){
+//       @content;
+//   }
+// }
+
+// /* Larger than desktop */
+// @mixin s_1000 {
+//   @media (min-width: 1000px){
+//       @content;
+//   }
+// }
+
+// /* Larger than tablet */
+// @mixin s_750 {
+//   @media (min-width: 750px){
+//       @content;
+//   }
+// }
+
+// /* Larger than phablet (also point when grid becomes active) */
+// @mixin s_550 {
+//   @media (min-width: 550px){
+//       @content;
+//   }
+// }
+
+// /* Larger than mobile */
+// @mixin s_400 {
+//   @media (min-width: 400px){
+//       @content;
+//   }
+// }

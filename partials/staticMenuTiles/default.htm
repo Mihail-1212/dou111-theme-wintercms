@@ -1,0 +1,5 @@
+{% if __SELF__.menuItems %}
+    <ul class="row remove-list-style">
+        {% partial __SELF__ ~ "::items" items=__SELF__.menuItems %}
+    </ul>
+{% endif %}

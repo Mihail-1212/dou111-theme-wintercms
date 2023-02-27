@@ -1,0 +1,40 @@
+{% for item in items | filter(item => not item.viewBag.isHidden) %}
+
+    <li role="presentation" class="col-lg-3 col-md-4 col-6 {{ item.isActive ? 'active' : '' }}">
+        {% if item.url %}
+            <a href="{{ item.url }}" {{ item.viewBag.isExternal ? 'target="_blank"' }} class="tile d-grid rows-half min-height-normal unstyled-link shadow-box-hoverable {{ item.isActive ? 'active' : '' }}"> 
+        {% else %}
+            <div class="tile d-grid rows-half min-height-normal {{ item.isActive ? 'active' : '' }}">
+        {% endif %}
+
+            {% if item.viewBag.cssClass %}
+                <i class="{{ item.viewBag.cssClass }} icon scale-3 font-size-18 m-auto"></i>
+            {% endif %}
+
+            <div class="tile-body">
+                <div class="card-text">
+                    <p class="m-0 text-center font-size-14 font-w-medium">
+                        {{ item.title }}
+                    </p>
+                </div>
+            </div>
+
+        {% if item.url %}
+             </a>
+        {% else %}
+            </div>
+        {% endif %}
+
+
+        {% if item.items %}
+            <script>
+                console.error('Дочерние элементы не поддерживаются в данном типе меню!');
+            </script>
+            {#
+            <ul>
+                {% partial __SELF__ ~ "::items" items=item.items %}
+            </ul> 
+            #}
+        {% endif %}
+    </li>
+{% endfor %}

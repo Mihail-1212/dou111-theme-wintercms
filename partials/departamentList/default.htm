@@ -1,0 +1,67 @@
+<div class="row gy-3">
+
+  {% for departament_item in departament_list %}
+    {% set main_photo = departament_item.departament_photos.first %}
+
+    <div class="col-12"> 
+      <div class="row">
+        <div class="name col-8">
+          <h4>
+            {% if departament_item.is_main %}
+              <i class="fas fa-city"></i>
+            {% else %}
+              <i class="far fa-building"></i>
+            {% endif %}
+
+            {{ departament_item.name }} {% if departament_item.is_main %}<small class="color-black-blue">{{ "Main" | _ }}</small>{% endif %}
+          </h4>
+        </div>
+
+        <div class="col-4 text-right">
+          <a class="link text-decoration-none" href="mailto:{{ departament_item.email }}"> 
+            <span class="text-decoration-underline-hover">
+              {{ departament_item.email }}
+            </span>
+
+            <span class="far fa-envelope d-inline-block"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+          <a 
+            class="d-inline-block w-100" 
+            href="{{main_photo.photo_path|media}}" 
+            data-jbox-image="gallery_departament" title="{{ departament_item.name }}">
+            <img 
+              class="u-max-full-width img-cover w-100"
+              style="height: 150px;" 
+              src="{{main_photo.photo_path|media}}" alt="{{ departament_item.name }}">
+          </a>
+      </div>
+      
+      <div class="row font-size-12">
+        <div class="col-12">
+          <strong>{{ 'Address' | _ }}:</strong> {{ departament_item.getFullAddress() }}
+        </div>
+
+        <div class="col-12">
+          <strong>
+            <a href="tel:{{ departament_item.contact_phone }}" class="link dark-link">{{ 'Phone' | _ }}:</a>
+          </strong> 
+          {{ departament_item.contact_phone }}
+        </div>
+      </div>
+
+      <div class="row m-t-1 font-size-14">
+        <a href="{{ 'departament' | page({departament_id: departament_item.id}) }}" class="link">
+          {{ 'Go to page' | _ }}
+        </a>
+      </div>
+
+      <hr class="m-t-4 m-b-2" />
+    </div>
+
+  {% endfor %}
+
+</div>

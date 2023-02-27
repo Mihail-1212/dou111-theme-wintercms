@@ -1,0 +1,220 @@
+[viewBag]
+
+[seo]
+
+[fontAwesomeCssLink]
+==
+<!-- Meta -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="title" content="{{ this.theme.site_name}} - {{ this.page.meta_title }}">
+<link rel="icon" type="image/png" href="{{ favIconHref }}">
+
+<!-- Site title -->
+<title>{{ this.page.title }} - {{ this.theme.site_name }}</title>
+<meta name="description" content="{{ this.theme.site_description }} {{ this.page.meta_description }}">
+
+
+
+<!-- Page load style -->
+<style>
+   #loading {
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 1;
+      background-color: #fff;
+      z-index: 9999999;
+
+      text-align: center;
+  }
+
+  #loading .loading-title {
+    position: absolute;
+    margin-bottom: 20em;
+}
+
+#loading .loader,
+#loading .loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+#loading .loader {
+  margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(47,172,222, 0.2);
+  border-right: 1.1em solid rgba(47,172,222, 0.2);
+  border-bottom: 1.1em solid rgba(47,172,222, 0.2);
+  border-left: 1.1em solid #2facde;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+}
+</style>
+
+<!-- Search style -->
+<style>
+	.ss-search-form__input {
+        display: flex;
+    }
+    .ss-search-form__input input[type=text] {
+        flex-grow: 1;
+        border-radius: var(--content-border-radius) 0 0  var(--content-border-radius);
+    }
+
+    .ss-search-form__input input[type=text]:focus {
+        border-color: #555;
+    }
+
+    .ss-search-form__input .ss-search-form__submit {
+     padding: 0 1.5em;
+     border-radius: 0 var(--content-border-radius) var(--content-border-radius) 0;
+
+     background: #555;
+     color: #fff;
+ }
+
+ .ss-search-form__input .ss-search-form__submit .gg-search {
+     --ggs: 1.1;
+ }
+</style>
+
+<!-- Pagination style -->
+<style>
+  .pagination-list .sort-control .sort-control-asc {
+    display: none;
+  } 
+  .pagination-list .sort-control .sort-control-desc {
+    display: none;
+  } 
+
+  .pagination-list .sort-control.asc .sort-control-asc {
+    display: inherit;
+  } 
+
+  .pagination-list .sort-control.desc .sort-control-desc {
+    display: inherit;
+  }
+
+  .pagination-list .pagination-wrapper {
+    padding: 0!important;
+  }
+
+  .pagination-list .pagination-wrapper .pagination {
+    padding: 0!important;
+  }
+
+  .pagination-list .pagination-wrapper li {
+    padding: 0;
+  }
+
+  .pagination-list .pagination-wrapper li .page {
+    display: inline-block;
+    padding: 1.5rem 3rem;
+
+    text-decoration: none;
+    color: var(--body-main-text-color);
+
+    transition: .3s;
+  }
+
+  .pagination-list .pagination-wrapper li:not(.disabled) .page:hover {
+    background-color: var(--body-lightnest-blue-color);
+    color: var(--body-black-blue-color);
+  }
+
+  .pagination-list .pagination-wrapper li.active {
+    position: relative;
+  }
+
+  .pagination-list .pagination-wrapper li.active::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    display: inline-block;
+
+    background-color: var(--body-main-text-color);
+
+    position: absolute;
+    bottom: 0; right: 0; left: 0;
+  }
+
+  .pagination-list .pagination-wrapper li.disabled { 
+    cursor: not-allowed;
+  }
+
+  .pagination-list .pagination-wrapper li.disabled .page {
+    color:gray;
+  
+    pointer-events: none;
+  }
+
+  .pagination-wrapper .control-button {
+
+  }
+
+/*  .pagination-wrapper .control-button.disabled {
+    cursor: not-allowed;
+  }
+
+  .pagination-wrapper .control-button.disabled a {
+    color:gray;
+
+    pointer-events: none;
+    text-decoration: none;
+  
+  }*/
+
+</style>
+
+<!-- Skeleton -->
+<link rel="stylesheet" href="{{ 'assets/vendor/skeleton/css/normalize.css'|theme }}">
+<link rel="stylesheet" href="{{ 'assets/vendor/skeleton/css/skeleton.css'|theme }}">
+<!-- Bootstrap grid-->
+<link rel="stylesheet" href="{{ 'assets/vendor/bootstrap/css/bootstrap-grid.min.css'|theme }}">
+<!-- Jquery navbar-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alizahid/slinky/dist/slinky.min.css">
+<!-- Slider-->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+<!-- Module wind and tooltips-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.2/dist/jBox.all.min.css">
+<!-- User styles-->
+
+<link href="{{ [
+  '@framework.extras',
+  'assets/dist/css/app.css'
+]|theme }}" rel="stylesheet">

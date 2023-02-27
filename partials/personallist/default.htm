@@ -1,0 +1,27 @@
+<div class="row gy-3">
+  {% for personal_item in personal_list %}
+    {% set full_name = personal_item.getFullName() %}
+    {% set personal_departament = personal_item.departament %}
+    {% set personal_job_position = personal_item.job_position %}
+
+    <div class="col-lg-2 m-b-1">
+      <div class="tile d-grid rows-half min-height-normal">
+      <img class="u-max-full-width img-cover w-100"
+        style="height: 150px;"
+        src="{{personal_item.photo_path|media}}" alt="{{ full_name }}">
+        <div class="tile-body">
+          <div class="card-text">
+
+            <p class="m-0 mb-3">{{ full_name }}</p>
+            <p class="m-0 font-size-10">
+              {{ personal_job_position.name | ucfirst }}
+            </p>
+            <p class="m-0 font-size-10">
+                <strong>{{ personal_departament.name }}</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

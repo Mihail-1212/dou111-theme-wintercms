@@ -1,0 +1,132 @@
+items:
+    -
+        title: Главная
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: index
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Сведения об образовательной организации'
+        nesting: 1
+        type: static-page
+        url: null
+        code: ''
+        reference: information-about-educational-organization
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'О нас'
+        nesting: 1
+        type: static-page
+        url: null
+        code: ''
+        reference: about
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Контакты
+        nesting: 1
+        type: static-page
+        url: null
+        code: ''
+        reference: contacts
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Электронная приёмная'
+        nesting: 1
+        type: static-page
+        url: null
+        code: ''
+        reference: electronic-reception
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Независимая оценка качества'
+        nesting: 0
+        type: static-page
+        url: null
+        code: ''
+        reference: independent-quality-assessment
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Питание
+        nesting: 0
+        type: static-page
+        url: null
+        code: ''
+        reference: food
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Корпуса
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: departaments
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Услуги
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: services
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Персонал
+        nesting: null
+        type: cms-page
+        url: null
+        code: ''
+        reference: personal
+        cmsPage: null
+        replace: null
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+name: 'Меню шапки'

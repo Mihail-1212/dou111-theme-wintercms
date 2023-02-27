@@ -1,0 +1,36 @@
+
+$spaceamounts: (0, 1, 2, 3, 4, 5, 6);
+$sides: (top, bottom, left, right, all);
+
+@each $space in $spaceamounts  {
+  // Margin and padding
+  @each $side in $sides {
+
+    @if $side == 'all' {
+      .m-#{$space} {
+        margin: #{$space}rem;
+      }
+
+      .p-#{$space} {
+        padding: #{$space}rem;
+      }
+    } @else {
+      .m-#{str-slice($side, 0, 1)}-#{$space} {
+        margin-#{$side}: #{$space}rem;
+      }
+
+      .p-#{str-slice($side, 0, 1)}-#{$space} {
+        padding-#{$side}: #{$space}rem;
+      }
+    }
+  }
+
+  // Flex-gap
+  .row-gap-#{$space} {
+    row-gap: $space * 1rem;
+  }
+
+  .col-gap-#{$space} {
+    column-gap: $space * 1rem;
+  }
+}

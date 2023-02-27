@@ -1,0 +1,68 @@
+[viewBag]
+
+[staticMenu staticMenuFooterFast]
+code = "footerfastlinks"
+
+[linkList]
+В Контакте = 1
+Twitter = 0
+linkTarget = "_blank"
+
+[departamentComponent departamentComponentFooter]
+departamentElement = 2
+==
+<footer class="m-t-5">
+  <div class="container-lg p-t-5">
+    <div class="row">
+
+      <div class="col-md-6 col-lg-3">
+        <h5>{{ this.theme.org_name }}</h5>
+        {% content 'site/footer_description' %}
+        <div class="row">
+            {% component 'linkList' %}
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <h5 class="row">{{ "News" | _ }}</h5>
+
+        <div class="footer-border-top">
+          Тут должны быть новости из ВК
+        </div>
+
+<!--         <div class="row m-b-2 footer-border-top">
+          <h6 class="m-b-0">Новость 1</h6>
+          <p class="m-b-0">Текст новости 1</p><a class="link" href="#"> Ссылка на новость 1
+            <span class="fas fa-link d-inline-block m-l-1"></span>
+          </a>
+        </div>
+        <div class="row">
+          <h6 class="m-b-0">Новость 2</h6>
+          <p class="m-b-0">Текст новости 2</p>
+          <a class="link" href="#"> 
+            Ссылка на новость 2
+            <span class="fas fa-link d-inline-block m-l-1"></span>
+          </a>
+        </div> -->
+
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <h5 class="row">{{ "Fast links" | _ }}</h5>
+        {% component 'staticMenuFooterFast' %}
+      </div>
+      
+      <div class="col-md-6 col-lg-3">
+        <h5 class="row">{{ "Have questions?" | _ }}</h5>
+        {% component 'departamentComponentFooter' %}
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col footer-border-top">
+        <p class="text-center">© <script>document.write(new Date().getFullYear())</script> {{ this.theme.org_full_abbreviation }} "{{ this.theme.org_name }}" {{ this.theme.org_subname }}</p>
+      </div>
+    </div>
+
+  </div>
+</footer>

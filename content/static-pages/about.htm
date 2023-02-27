@@ -1,0 +1,83 @@
+[viewBag]
+title = "О нас"
+url = "/about"
+layout = "default"
+is_hidden = 0
+navigation_hidden = 0
+static_title_show = 1
+static_title = "О нас"
+content_nav_show = 1
+scrollnav_show = 1
+==
+<figure data-component="PeterHegman\SlickSlider\Components\Slider" data-inspector-id="inspectorid-1217927369764" data-property-slide_show_id="1" data-snippet="slider">&nbsp;</figure>
+
+<h2>Overview <small>Basic concepts</small></h2>
+
+<p>This page demonstrates the basic CMS features. Usually each page built with Winter is a combination of a layout, page, partials and content blocks, although in simple cases you can just use a page without anything else.</p>
+
+<h3>Layouts</h3>
+
+<p>&nbsp; Layouts define the page scaffold.</p>
+
+<p>The layout file <code>layouts/default.htm</code> defines the page scaffold — everything that repeats on each page, such as the HTML, HEAD and BODY tags, StyleSheet and JavaScript references.</p>
+
+<p>The page menu and footer in the Demo theme are defined in the layout as well.</p>
+<hr>
+
+<h3>Pages</h3>
+
+<p>&nbsp; Pages hold the content for each URL.</p>
+
+<p>The page file <code>pages/home.htm</code> defines the page URL (<code>/</code> for this page) and the page content. Pages are rendered inside layouts with this function that should be called in the layout code:</p><pre>{{ "{% page %}" }}</pre>
+
+<p>Using a layout for pages is optional — you can define everything right in the page file.</p>
+<hr>
+
+<h3>Partials</h3>
+
+<p>&nbsp; Partials contain reusable chunks of HTML markup.</p>
+
+<p>Partials are chunks of HTML defined in separate files that can be included anywhere. Partials are rendered with:</p><pre>{{ "% partial \"partial-name\" %}" }}</pre>
+
+<p>You may place partials inside folders too. In this example we placed the footer content to the <code>partials/site/footer.htm</code> partial.</p><pre>{{ "% partial \"site/footer\" %}" }}</pre>
+
+<p>Partials can be used inside pages, layouts or other partials.</p>
+<hr>
+
+<h3>Content blocks</h3>
+
+<p>&nbsp; Content blocks are text or HTML blocks that can be edited separately from the page or layout.</p>
+
+<p>The introductory text used on this page is defined in the <code>content/welcome.htm</code> file. Content blocks are defined and rendered with:</p><pre>{{ "% content \"content-name.htm\" %}" }}</pre>
+
+<p>
+	<br>
+</p>
+<hr>
+
+<h3>Placeholders</h3>
+
+<p>&nbsp; Placeholders allow pages to inject content to a layout.</p>
+
+<p>The common use is injecting page-specific links to StyleSheet or JavaScript files to the HEAD tag defined in the layout. Placeholders are defined in the layout file and they have names so that they can be referred in the page. Example:</p>
+
+<p>Layout file:</p><pre>% content "placeholder/layout.txt" %}</pre>
+
+<p>Page file:</p><pre>{ content "placeholder/page.txt" %}</pre>
+<hr>
+
+<h3>Assets</h3>
+
+<p>&nbsp; Assets are resource files like images and stylesheets.</p>
+
+<p>This theme stores its asset files (JavaScript, StyleSheet, images, fonts, etc) in the <code>themes/demo/assets</code> directory. This theme is also packaged with these useful 3rd party tools:</p>
+
+<ul>
+	<li><a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a></li>
+	<li><a href="http://fontawesome.io/3.2.1/" target="_blank">Font Awesome</a></li>
+	<li><a href="http://www.google.com/fonts/specimen/Lato" target="_blank">Lato webfont</a></li>
+</ul>
+
+<p>You might prefer to remove them for your website implementation.</p>
+
+<p><a href="http://127.0.0.1:8000/backend/winter/%7B%20'ajax'%7Cpage%20%7D%7D">Continue to AJAX framework</a></p>

@@ -55,7 +55,7 @@ theme = "dark-bottom"
 {variable type="checkbox" name="content_nav_show" label="Показывать Связанные страницы" tab="Страница" default="checked"}{/variable} 
 {variable type="checkbox" name="scrollnav_show" label="Показывать список заголовков страницы (На этой странице)" tab="Страница" default="checked"}{/variable} 
 
-{variable type="checkbox" name="content_block_medium" label="Увеличенный блок контента (работает только при отключенном списке заголовков ИЛИ отключенном списке связанных страниц)" tab="Страница" default="checked"}{/variable} 
+{variable type="checkbox" name="content_block_medium" label="Увеличенный блок контента (работает только при отключенном списке заголовков)" tab="Страница" default="checked"}{/variable} 
 {variable type="checkbox" name="content_block_big" label="Блок контента на всю страницу (работает только при отключенном списке заголовков И отключенном списке связанных страниц)" tab="Страница" default="checked"}{/variable} 
 
 
@@ -87,7 +87,7 @@ theme = "dark-bottom"
             
             <div 
                 class="
-                {% if content_block_medium and (not scrollnav_show or not content_nav_show) %} col-lg-10 
+                {% if content_block_medium and (not scrollnav_show) %} col-lg-10 
                 {% elseif content_block_big and (not scrollnav_show and not content_nav_show) %} col-lg-12 
                 {% else %} col-lg-8 
                 {% endif %}

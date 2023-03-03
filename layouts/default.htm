@@ -35,6 +35,8 @@ function onInit()
         $this['currentUrl'] = Request::url();
         $this['homePageUrl'] = $this->pageUrl('index');
         $this['isHomePage'] = $this['currentUrl'] == $this['homePageUrl'];
+        $this['backendUrl'] = Backend::url('/');
+        $this['backendAuth'] = BackendAuth::check();
     }
 
     function onVisuallyImpaired()
@@ -126,6 +128,9 @@ function onInit()
 
 <!-- Button go up  -->
 {% partial 'site/helperControls' %}
+
+<!-- Admin panel button -->
+{% partial 'site/adminPanelButton' %}
 
 {% partial 'site/scripts' %}
 {% scripts %}

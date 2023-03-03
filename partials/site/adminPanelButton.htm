@@ -1,0 +1,24 @@
+{% if backendAuth %}
+    
+<div class="admin-panel-controls ps-fixed">
+
+    <a 
+        id="adminPanelButton"
+        class="button button-primary button-icon button-icon-no-text text-decoration-none tooltip-dark" 
+        href="{{ backendUrl }}"
+        target="_blank" 
+
+        title="{{ 'Go to admin panel' | _ }}"
+        aria-label="{{ 'Go to admin panel' | _ }}"
+        >
+
+        <div class="icon-wrapper">
+            <span class="fas fa-user-cog font-size-12 d-block scale-1-5"></span>
+        </div>
+        <span class="text">&#x200B</span>
+    </a>
+
+</div>
+
+{% endif %}
+

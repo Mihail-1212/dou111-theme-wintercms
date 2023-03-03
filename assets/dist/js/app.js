@@ -13,11 +13,11 @@ $(window).on("load", function () {
   var _require = __webpack_require__(/*! ./ui/navbar */ "./themes/dou111-theme/assets/javascript/ui/navbar.js"),
     navbar = _require.navbar;
   // const { slider } = require("./ui/slider");
-  var _require2 = __webpack_require__(/*! ./ui/tooltip */ "./themes/dou111-theme/assets/javascript/ui/tooltip.js"),
-    tooltip = _require2.tooltip;
+  // const { tooltip } = require("./ui/tooltip");
+
   navbar();
   // slider();
-  tooltip();
+  // tooltip();
 });
 
 /***/ }),
@@ -106,37 +106,6 @@ function navbar() {
       resize: false,
       title: false
     });
-  });
-}
-;
-
-/***/ }),
-
-/***/ "./themes/dou111-theme/assets/javascript/ui/tooltip.js":
-/*!*************************************************************!*\
-  !*** ./themes/dou111-theme/assets/javascript/ui/tooltip.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "tooltip": () => (/* binding */ tooltip)
-/* harmony export */ });
-function tooltip() {
-  var toolTipSelector = '.tooltip';
-  var toolTipDarkSelector = '.tooltip-dark';
-
-  // ToolTip
-  new jBox('Tooltip', {
-    attach: toolTipSelector,
-    animation: 'zoomIn'
-  });
-  // TooltipDark
-  new jBox('Tooltip', {
-    attach: toolTipDarkSelector,
-    animation: 'zoomIn',
-    theme: 'TooltipDark'
   });
 }
 ;

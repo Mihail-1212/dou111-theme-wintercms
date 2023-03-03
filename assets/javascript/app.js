@@ -4,9 +4,9 @@ require('./bootstrap');
 $(window).on("load", function() {
   const { navbar } = require("./ui/navbar");
   // const { slider } = require("./ui/slider");
-  const { tooltip } = require("./ui/tooltip");
+  // const { tooltip } = require("./ui/tooltip");
 
   navbar();
   // slider();
-  tooltip();
+  // tooltip();
 });

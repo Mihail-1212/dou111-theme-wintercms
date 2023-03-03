@@ -183,6 +183,45 @@
   });
 </script>
 
+<!-- Tooltip jbox -->
+<script>
+  $(window).on('load', function() {
+    var toolTipSelector = '.tooltip';
+    var toolTipDarkSelector = '.tooltip-dark';
+    var mouseSelector = '.tooltip-mouse';
+
+    // ToolTip
+    new jBox('Tooltip', {
+      attach: toolTipSelector,
+      animation: 'zoomIn',
+    });
+    // TooltipDark
+    new jBox('Tooltip', {
+      attach: toolTipDarkSelector,
+      animation: 'zoomIn',
+      theme: 'TooltipDark'
+    });
+    // Mouse toooltip
+    new jBox('Mouse', {
+      attach: mouseSelector,
+      animation: 'zoomIn',
+      theme: 'TooltipDark',
+      zIndex: 4e3,
+      position: {
+          x: "left",
+          y: "top"
+      },
+
+      offset: {
+        x: -5,
+        y: -5
+      },
+
+      getContent: "data-content"
+    });
+  });  
+</script>
+
 
 <!-- Paginator -->
 <script>

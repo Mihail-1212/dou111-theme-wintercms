@@ -40,6 +40,11 @@ body {
   --body-dark-blue-color: #{$dark-blue};
   --body-black-blue-color: #{$black-blue};
 
+  --body-yellow-color: #{$yellow};
+
+  --body-red-color: #{$red};
+  --body-tomato-red-color: #{$tomato-red};
+
   background-color: var(--body-background);
   font-family: 'Raleway', sans-serif;
   font-weight: 500;
@@ -92,20 +97,6 @@ hr {
 //   max-width: 1080px;
 // }
 
-// Button to top
-
-#toTop {
-  right: 20px;
-  bottom: 20px;
-  transition: opacity .5s, visibility .5s;
-  opacity: 0;
-  visibility: hidden;
-
-  &.show {
-    opacity: 1;
-    visibility: visible;
-  }
-}
 
 
 // x1 - 768px - mobile

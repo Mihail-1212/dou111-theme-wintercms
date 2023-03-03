@@ -1,0 +1,40 @@
+
+<div class="faq-wrapper">
+
+    <ul class="faq remove-list-style row m-0">
+        {% set break = false %}
+        {% for item in faq if not break %}
+
+        <li class="faq-item col-12 m-b-4 block">
+            <div class="faq-item-inner">
+
+                <div class="question">
+                    <h6 class="m-0">
+                        {{ item.question|raw }}
+                    </h6>
+                </div>
+
+                <hr class="" />
+
+                <div class="answer">{{ item.answer|raw }}</div>
+
+            </div>
+        </li>
+
+        {% if loop.index >= 2 %}
+            {% set break = true %}
+        {% endif %}
+
+        {% endfor %}
+
+        <li class="col-12 m-0">
+            <h4>
+                <a href="{{ 'faq' | staticPage }}" class="link dark-link">
+                    {{ 'Show all questions' | _ }}?
+                    <i class="fas fa-layer-group"></i>
+                </a>
+            </h4>
+        </li>
+    </ul>
+
+</div>

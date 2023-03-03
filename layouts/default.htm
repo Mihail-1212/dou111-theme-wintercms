@@ -14,10 +14,16 @@ security = "all"
 message = "Этот веб-сайт использует файлы cookie, чтобы обеспечить вам максимальное удобство на нашем веб-сайте."
 dismiss = "Понятно!"
 learnMore = "Подробнее"
+link = "http://www.yourwebpage.com/cookies"
 theme = "dark-bottom"
+
+[messages]
+activeOnly = 1
+hide_with_cookie = 1
+categorySlug = 0
 ==
 <?php
-    function onInit()
+function onInit()
     {
         $this['cookiesPageUrl'] = Winter\Pages\Classes\Page::url('cookies');
     }
@@ -69,6 +75,9 @@ theme = "dark-bottom"
 </head>
 <body>
 
+    {% component 'messages' %}
+
+
     <div id="wrapper">
         {% partial 'site/header' %}
 
@@ -116,10 +125,8 @@ theme = "dark-bottom"
 </div>
 
 <!-- Button go up  -->
-<buttton class="button button-dark button-icon button-icon-no-text ps-fixed text-decoration-none" id="toTop">
-  <div class="icon-wrapper"><span class="fas fa-chevron-up font-size-12 d-block scale-1-5"></span></div><span
-  class="text">&#x200B</span>
-</buttton>
+{% partial 'site/helperControls' %}
+
 {% partial 'site/scripts' %}
 {% scripts %}
 

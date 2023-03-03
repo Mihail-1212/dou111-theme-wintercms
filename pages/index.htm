@@ -71,6 +71,14 @@ useManagement = 1
 file = "home-page/brands-title.htm"
 fixture = "h5"
 
+[contenteditor contenteditorFAQTitle]
+file = "home-page/faq-title.htm"
+fixture = "h5"
+
+[contenteditor contenteditorContactFormTitle]
+file = "home-page/contact-form-title.htm"
+fixture = "h5"
+
 [brands]
 brandPage = "{{ brands | staticPage }}"
 categoryPage = 404
@@ -82,6 +90,16 @@ pageNumber = "{{ page }}"
 perRow = 3
 logoWidth = 300
 logoHeight = 300
+
+[faq faqHomePage]
+add_jsonld = 1
+
+[contactForm]
+form_description = "Contact form home page"
+disable_notifications = 0
+disable_autoreply = 0
+allow_redirect = 0
+redirect_url = "/"
 ==
 <!-- Слайдер и баннеры -->
 <div class="page-row row">
@@ -192,6 +210,36 @@ logoHeight = 300
   <div class="block row">
         {% component 'brands' %}
   </div>
+</div>
+
+<!-- FAQ and contact form -->
+
+<div class="row page-row">
+
+  <div class="row">
+    <div class="col">
+        {% component 'contenteditorFAQTitle' %}
+    </div>
+  </div>
+
+  <div class="block row gx-5">
+
+    <div class="col-6">
+      {% component 'faqHomePage' %}
+    </div>
+
+    <div class="col-6">
+
+        {% component 'contenteditorContactFormTitle' %}
+    
+        {% component 'contactForm' %}
+
+        <hr />
+
+    </div>
+    
+  </div>
+  
 </div>
 
 

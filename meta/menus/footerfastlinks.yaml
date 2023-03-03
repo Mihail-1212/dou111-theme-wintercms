@@ -107,8 +107,21 @@ items:
         title: Бренды
         nesting: 0
         type: static-page
+        url: null
         code: ''
         reference: brands
+        cmsPage: null
+        replace: 0
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Связаться с нами'
+        nesting: 0
+        type: static-page
+        code: ''
+        reference: contact-form
         replace: 0
         viewBag:
             isHidden: '0'

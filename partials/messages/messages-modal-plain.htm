@@ -1,0 +1,173 @@
+{% put scripts %}
+    <!-- Messages UI -->
+    <script type = "text/template" id="template-sm-messages-{{ __SELF__.alias }}">
+        {% set cookiesAllowed = [] %}
+
+        <div id="sm-messages-{{ __SELF__.alias }}" class="sm-messages">
+
+            {% if messagesItems|length %}
+
+                {% for message in messagesItems|reverse %}
+
+                    <div id="sm-message-{{message.id}}">
+
+                        {% if message.cookie_allow %}
+
+                            {% set cookiesAllowed = cookiesAllowed|merge({ (loop.index) : message }) %}
+
+                        {% endif %}
+
+                        <div class="message">
+
+                            {% if message.title %}
+
+                                <h6 class="message-title color-black-blue m-b-1">{{ message.title }}</h6>
+
+                            {% endif %}
+
+                            {% if message.content %}
+
+                                <div class="message-content">
+                                    {{ message.content|raw }}
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                    {% if not loop.last %}
+                        <hr class="m-b-1" />
+                    {% endif %}
+
+                {% endfor %}
+
+                {#
+                Hide this shit
+
+                <div class="footer">
+
+                    <button id="sm-btn-{{ __SELF__.alias }}" type="button" class="button button-primary" data-dismiss="modal">
+
+                        {{ smSettingsGet('btn_hide_title') ? smSettingsGet('btn_hide_title') : 'Hide' }}
+
+                    </button>
+
+                </div>
+
+                #}
+
+            {% else %}
+                
+                <h6>
+                    {{ 'There are no notifications at the moment!' | _ }}
+                </h6>
+
+            {% endif %}
+
+        </div>
+    </script>
+
+    <!-- Messages scripts -->
+    <script>
+        // Jbox Modal window
+        // var notifyMessageBlock = $('#sm-messages-{{ __SELF__.alias }}');
+        // console.log(notifyMessageBlock);
+
+    
+        $(window).on("load", function (e) {
+            const jboxOffset = {
+                x: -100,
+                y: $('#header-nav').outerHeight() + 5,
+            };
+            const MESSAGES_COOKIE_NAME = "sm-cookie-items";
+
+            var notifyButton = $('#notifyButton');  // .unchecked
+            // Получаем список уведомлений
+            var notifyArray = {{ messagesItems|reverse|json_encode(constant("JSON_PRETTY_PRINT"))|raw }},
+                // Получаем список ID уведомлений, которые отображаются всем на данный момент
+                notififyIdSet = notifyArray.map(x => x.id);
+
+            new jBox('Modal', {
+                attach: '#notifyButton',
+                title: "<span class='font-size-13'><span class='font-w-bold'>{{ 'Notifications' | _ }}</span> <i class='far fa-bell'></span>",
+
+                content: '<div>' + $('#template-sm-messages-{{ __SELF__.alias }}').html() + '</div>',
+
+                // Unique id for CSS access
+                id: 'notifyModal',
+
+                overlay: false,
+                createOnInit: true,
+                repositionOnOpen: true,
+                repositionOnContent: true,
+
+                // draggable: 'title',
+                // closeButton: false,
+
+                animation: 'zoomIn',
+
+                blockScroll: false,
+
+                position: {
+                    x: 'right', 
+                    y: 'top'
+                },
+
+                offset: {
+                    x: jboxOffset.x, 
+                    y: jboxOffset.y,
+                },
+
+                maxHeight:  $(window).height() - (3*jboxOffset.y),
+
+                onCreated() {
+                    var $wrapper = this.wrapper;
+                    // Add scrollvar style for normal scrollbar
+                    $wrapper.find('.jBox-content').addClass('scrollbar-style');
+
+                    // Получаем список ID, которые пользователь просмотрел из cookies
+                    var cookieStoredList = getCookie( MESSAGES_COOKIE_NAME );
+                    var storedIdList = [];
+                    if (cookieStoredList) {
+                        var storedIdList = JSON.parse(cookieStoredList);
+                    }
+                    
+                    // Получаем список ID, которые ранее не были просмотрены пользователем
+                    var unCheckedItems = _.difference(notififyIdSet, storedIdList);
+
+                    // Если есть непросмотреннные ID
+                    if (unCheckedItems.length) {
+                        notifyButton.addClass('unchecked');
+                    }
+                },
+
+                onOpen() {
+                    // Вставляем в cookie список уведомлений, которые были просмотрены ттолько что (заменяем список)
+                    var notififyIdSetJson = JSON.stringify( notififyIdSet );
+                    createCookie(MESSAGES_COOKIE_NAME, notififyIdSetJson);
+
+                    // Убираем значок выделения с кнопки уведомлений
+                    notifyButton.removeClass('unchecked');
+
+
+                    // Set cookies was updated
+                    {% if cookiesAllowed|length %}
+                        // Set cookies for Messages
+                        {% for item in cookiesAllowed if item.cookie_lifetime_days > 0 %}
+
+                            // var date = new Date();
+                            // date.setDate(date.getDate() + {{ item.cookie_lifetime_days }});
+                            // document.cookie = "{{ 'sm-cookie-'~item.id~'=1; path=/; expires='}}" + date.toGMTString();
+
+                        {% endfor %}
+                    {% endif %}
+                },
+
+            });
+        });
+     
+    </script>
+
+{% endput %}

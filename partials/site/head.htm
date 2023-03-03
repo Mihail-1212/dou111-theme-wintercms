@@ -197,7 +197,51 @@
     text-decoration: none;
   
   }*/
+</style>
 
+<!-- Controls right-bottom -->
+<style>
+  .helper-controls {
+    right: 20px;
+    bottom: 20px;
+  }
+
+  #toTop {
+    transition: opacity 0.5s, visibility 0.5s;
+    opacity: 0;
+    visibility: hidden;
+  }
+  #toTop.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sm-messages {}
+
+  .sm-messages .message-content p {
+      margin-bottom: .8rem;
+  }
+
+  #notifyButton {}
+
+  /* Notify button styles */
+  #notifyButton.unchecked {
+      position: relative;
+  }
+
+  #notifyButton.unchecked::after {
+      content: "";
+      width: 1.5rem; height: 1.5rem;
+
+      margin-right: 2px; margin-top: 2px;
+
+      position: absolute;
+      top: 0; right: 0;
+
+      border-radius: 100%;
+      border: 1px solid var(--body-red-color);
+      background-color: var(--body-tomato-red-color);
+  }
 </style>
 
 <!-- Skeleton -->

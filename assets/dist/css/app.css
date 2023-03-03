@@ -1629,6 +1629,9 @@ body {
   --body-blue-color: #2facde;
   --body-dark-blue-color: #3498db;
   --body-black-blue-color: #033a5f;
+  --body-yellow-color: #eeb236;
+  --body-red-color: #e9232b;
+  --body-tomato-red-color: #d63031;
   background-color: var(--body-background);
   font-family: "Raleway", sans-serif;
   font-weight: 500;
@@ -1665,16 +1668,4 @@ h6 {
 
 hr {
   margin: 0;
-}
-
-#toTop {
-  right: 20px;
-  bottom: 20px;
-  transition: opacity 0.5s, visibility 0.5s;
-  opacity: 0;
-  visibility: hidden;
-}
-#toTop.show {
-  opacity: 1;
-  visibility: visible;
 }

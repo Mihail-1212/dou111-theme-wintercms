@@ -1,0 +1,11 @@
+items:
+    -
+        title: 'Заявление на отпуск'
+        type: url
+        url: 'https://docs.google.com/forms/d/e/1FAIpQLScJagDYsfnve7WzlrRlkO1U6YmZUbFYa5ALl65TDOuSZ3h-AQ/viewform?usp=sf_link'
+        code: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: 'fas fa-plane'
+            isExternal: '1'
+name: 'Меню анкет'

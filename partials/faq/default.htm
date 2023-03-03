@@ -1,0 +1,26 @@
+
+<div class="faq-wrapper">
+
+  <ul class="faq remove-list-style row">
+      {% for item in faq %}
+
+      <li class="faq-item col-12 m-b-4 block">
+          <div class="faq-item-inner">
+
+            <div class="question">
+              <h6 class="m-0">
+                {{ item.question|raw }}
+              </h6>
+            </div>
+
+            <hr class="" />
+
+            <div class="answer">{{ item.answer|raw }}</div>
+
+          </div>
+      </li>
+
+      {% endfor %}
+  </ul>
+
+</div>
